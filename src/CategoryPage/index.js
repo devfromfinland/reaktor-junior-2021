@@ -13,7 +13,7 @@ const CategoryPage = ({ data }) => {
             height={window.innerHeight}
             width={width}
             itemCount={data.length}
-            itemSize={20}
+            itemSize={124}
             itemData={data}
           >
             {Item}

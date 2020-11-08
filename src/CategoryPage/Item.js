@@ -9,10 +9,12 @@ import React from 'react'
   color: Array of String
 */
 
-const Item = ({ item }) => {
-  // console.log('item', item)
+const Item = ({ data, index, style }) => {
+  // console.log('item', data[index])
   return (
-    <li>{item.name}</li>
+    <div style={style}>
+      {data[index].name}
+    </div>
   )
 }
 

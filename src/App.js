@@ -1,10 +1,36 @@
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import CategoryPage from './CategoryPage'
 import './App.css'
 
-function App() {
+const App = () => {
   return (
-    <div>
-      Hello world!
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/jackets'>Jackets</Link>
+            </li>
+            <li>
+              <Link to='/shirts'>Shirts</Link>
+            </li>
+            <li>
+              <Link to='/accessories'>Accessories</Link>
+            </li>
+          </ul>
+        </nav>
+        
+        <Switch>
+          <Route path='/' exact render={() => (<div>Hello world</div>)}/>
+          <Route path='/:category' component={CategoryPage} />
+          <Route path='*' render={() => (<div>404</div>)} />
+        </Switch>
+      </div>
+    </Router>
   )
 }
 

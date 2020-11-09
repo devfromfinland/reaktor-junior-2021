@@ -1,15 +1,18 @@
 import axios from 'axios'
-import { countManufacturers, convertArrayToObject, readAvailabilityData } from '../utils/helpers'
+import { convertArrayToObject } from '../utils/helpers'
 
 const apiUrl = 'https://bad-api-assignment.reaktor.com'
+const forcedError = false
 
 export const getProductsByCategory = async (category) => {
   try {
-    const res = await axios.get(`${apiUrl}/products/${category}`, {
-      headers: {
-        'x-force-error-mode': 'all'
-      }
-    })
+    const res = forcedError
+      ? await axios.get(`${apiUrl}/products/${category}`, {
+        headers: {
+          'x-force-error-mode': 'all'
+        }
+      })
+      : await axios.get(`${apiUrl}/products/${category}`)
 
     // const { count, manufacturers } = countManufacturers(res.data)
     // console.log(`${category} has ${count} manufacturers`)
@@ -24,7 +27,13 @@ export const getProductsByCategory = async (category) => {
 
 export const getAvailabilityInfo = async (manufacturer) => {
   try {
-    const res = await axios.get(`${apiUrl}/availability/${manufacturer}`)
+    const res = forcedError
+      ? await axios.get(`${apiUrl}/availability/${manufacturer}`, {
+        headers: {
+          'x-force-error-mode': 'all'
+        }
+      })
+      : await axios.get(`${apiUrl}/availability/${manufacturer}`)
     // console.log(res)
     const result = convertArrayToObject(res.data.response, 'id')
     // console.log('result', result)

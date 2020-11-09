@@ -76,7 +76,7 @@ export const extractAvailabilityText = (text) => {
 
 export const findAvailability = (array, itemId) => {
   for (let i = 0; i < array.length; i++) {
-    if (itemId.toUpperCase() === array[i].id.toUpperCase()) {
+    if (itemId && array[i].id && itemId.toUpperCase() === array[i].id.toUpperCase()) {
       return extractAvailabilityText(array[i].DATAPAYLOAD)
     }
   }

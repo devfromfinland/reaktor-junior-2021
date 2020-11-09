@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { convertArrayToObject } from '../utils/helpers'
 
-const apiUrl = 'https://bad-api-assignment.reaktor.com'
 const forcedError = false
+const apiUrl = 'https://bad-api-assignment.reaktor.com'
+const headerForcedError = forcedError ? { headers: { 'x-force-error-mode': 'all' }} : null
 
 export const getProductsByCategory = async (category) => {
   try {
@@ -34,6 +35,7 @@ export const getAvailabilityInfo = async (manufacturer) => {
         }
       })
       : await axios.get(`${apiUrl}/availability/${manufacturer}`)
+    
     // console.log(res)
     const result = convertArrayToObject(res.data.response, 'id')
     // console.log('result', result)
@@ -72,14 +74,14 @@ const wrapPromise = (promise) => {
 }
 
 export const fetchData = () => {
-  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`).then(res => res.data)
-  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`).then(res => res.data)
-  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`).then(res => res.data)
-  let repsPromise = axios.get(`${apiUrl}/availability/reps`)
-  let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`)
-  let noukePromise = axios.get(`${apiUrl}/availability/nouke`)
-  let derpPromise = axios.get(`${apiUrl}/availability/derp`)
-  let xoonPromise = axios.get(`${apiUrl}/availability/xoon`)
+  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError).then(res => res.data)
+  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError).then(res => res.data)
+  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError).then(res => res.data)
+  let repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
+  let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
+  let noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)
+  let derpPromise = axios.get(`${apiUrl}/availability/derp`, headerForcedError)
+  let xoonPromise = axios.get(`${apiUrl}/availability/xoon`,headerForcedError)
 
   return {
     jackets: wrapPromise(jacketsPromise),

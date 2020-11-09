@@ -34,3 +34,42 @@ export const checkMemSize = (item) => {
   
   return sizeInBytes
 }
+
+export const countManufacturers = (productList) => {
+  let count = 0
+  let manufacturers = {}
+  for (let i = 0; i < productList.length; i++) {
+    if (!manufacturers[productList[i].manufacturer]) {
+      count++
+      manufacturers[productList[i].manufacturer] = productList[i].manufacturer
+    }
+  }
+  return {
+    count,
+    manufacturers: Object.keys(manufacturers)
+  }
+}
+
+export const convertArrayToObject = (array, key) => {
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item
+    }
+  }, {})
+}
+
+// export const readAvailabilityData = (array) => {
+//   return array.reduce((obj, item) => {
+//     return {
+//       ...obj,
+//       [item.id]: extractAvailabilityText(item.DATAPAYLOAD)
+//     }
+//   }, {})
+// }
+
+export const extractAvailabilityText = (text) => {
+  const regex = /<INSTOCKVALUE>(.*?)<\/INSTOCKVALUE>/
+  const result = text.match(regex)
+  return result[1]
+}

@@ -9,13 +9,13 @@ const NavigationBar = () => {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/jackets'>Jackets</Link>
+          <Link to='/category/jackets'>Jackets</Link>
         </li>
         <li>
-          <Link to='/shirts'>Shirts</Link>
+          <Link to='/category/shirts'>Shirts</Link>
         </li>
         <li>
-          <Link to='/accessories'>Accessories</Link>
+          <Link to='/category/accessories'>Accessories</Link>
         </li>
       </ul>
     </nav>

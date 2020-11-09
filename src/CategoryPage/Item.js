@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Suspense } from 'react'
+import Availability from './Availability'
 
 /* Item object
   id: String
@@ -10,7 +11,7 @@ import React from 'react'
 */
 
 const Item = ({ data, index, style }) => {
-  // console.log('item', data[index])
+  
   return (
     <div style={style} className={(index % 2 === 0) ? 'item odd' : 'item'}>
       <div className='item-content'>
@@ -18,7 +19,9 @@ const Item = ({ data, index, style }) => {
         <div>{data[index].manufacturer}</div>
         <div>{data[index].price}</div>
         <div>{data[index].color.toString()}</div>
-        <div>availability?</div>
+        <Suspense fallback={<div>checking...</div>}>
+          <Availability manufacturer={data[index].manufacturer} id={data[index].id}/>
+        </Suspense>
       </div>
     </div>
   )

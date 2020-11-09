@@ -42,3 +42,53 @@ export const getAvailabilityInfo = async (manufacturer) => {
     console.log('error', err)
   }
 }
+
+// temporarily used for learning React Suspend
+// check out: https://codesandbox.io/s/frosty-hermann-bztrp
+const wrapPromise = (promise) => {
+  let status = 'pending'
+  let result
+  let suspender = promise.then(
+    r => {
+      status = 'success'
+      result = r
+    },
+    e => {
+      status = 'error'
+      result = e
+    }
+  )
+  return {
+    read() {
+      if (status === 'pending') {
+        throw suspender
+      } else if (status === 'error') {
+        throw result
+      } else if (status === 'success') {
+        return result
+      }
+    }
+  };
+}
+
+export const fetchData = () => {
+  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`).then(res => res.data)
+  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`).then(res => res.data)
+  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`).then(res => res.data)
+  let repsPromise = axios.get(`${apiUrl}/availability/reps`)
+  let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`)
+  let noukePromise = axios.get(`${apiUrl}/availability/nouke`)
+  let derpPromise = axios.get(`${apiUrl}/availability/derp`)
+  let xoonPromise = axios.get(`${apiUrl}/availability/xoon`)
+
+  return {
+    jackets: wrapPromise(jacketsPromise),
+    shirts: wrapPromise(shirtsPromise),
+    accessories: wrapPromise(accessoriesPromise),
+    reps: wrapPromise(repsPromise),
+    abiplos: wrapPromise(abiplosPromise),
+    nouke: wrapPromise(noukePromise),
+    derp: wrapPromise(derpPromise),
+    xoon: wrapPromise(xoonPromise),
+  }
+}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CategoryPage from './CategoryPage'
-import { getProductsByCategory, getAvailabilityInfo } from './services/categoryService'
+import { fetchData } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
 import { AppContext } from './services/contextService'
 import './App.css'
@@ -26,59 +26,10 @@ import './App.css'
 // 'xoon': 8414 products (1 MB)
 
 // const data = fetchDataFromAPI()
+const data = fetchData()
 
 const App = () => {
-  const [ jackets, setJackets ] = useState(null)
-  const [ shirts, setShirts ] = useState(null)
-  const [ accessories, setAccessories ] = useState(null)
-  const [ availabilityData, setAvailabilityData ] = useState({})
-  const [ context, setContext ] = useState({})
-
-  useEffect(() => {
-    fetchAllData()
-
-    return () => {
-      // cancel API query if necessary
-    }
-  }, [])
-
-  const fetchAllData = async () => {
-    // todo: change data fetching to lazyload, Relay or Suspense
-
-    setJackets(await getProductsByCategory('jackets'))
-    setShirts(await getProductsByCategory('shirts'))
-    setAccessories(await getProductsByCategory('accessories'))
-
-    // const reps = await getAvailabilityInfo('reps')
-    // setAvailabilityData(availabilityData => ({
-    //   ...availabilityData,
-    //   reps
-    // }))
-
-    // const abiplos = await getAvailabilityInfo('abiplos')
-    // setAvailabilityData(availabilityData => ({
-    //   ...availabilityData,
-    //   abiplos
-    // }))
-
-    // const nouke = await getAvailabilityInfo('nouke')
-    // setAvailabilityData(availabilityData => ({
-    //   ...availabilityData,
-    //   nouke
-    // }))
-
-    // const derp = await getAvailabilityInfo('derp')
-    // setAvailabilityData(availabilityData => ({
-    //   ...availabilityData,
-    //   derp
-    // }))
-
-    // const xoon = await getAvailabilityInfo('xoon')
-    // setAvailabilityData(availabilityData => ({
-    //   ...availabilityData,
-    //   xoon
-    // }))
-  }
+  const [ context, setContext ] = useState(data)
 
   return (
     <AppContext.Provider value={{ context, setContext }}>
@@ -88,19 +39,12 @@ const App = () => {
           
           <Switch>
             <Route path='/' exact render={() => (<div>Hello world</div>)}/>
-            <Route path='/:category' render={({ match }) => {
-              switch (match.params.category) {
-                case 'jackets':
-                  return <CategoryPage data={jackets}/>
-                case 'shirts':
-                  return <CategoryPage data={shirts}/>
-                case 'accessories':
-                  return <CategoryPage data={accessories}/>
-                default:
-                  return <div>404 page</div>
-              }
-            }}/>
-            {/* <Route path='*' render={() => (<div>404</div>)} /> */}
+            <Route path='/category/:category'>
+              <Suspense fallback={<div>Loading data...</div>}>
+                <CategoryPage />
+              </Suspense>
+            </Route>
+            <Route path='*' render={() => (<div>404</div>)} />
           </Switch>
         </div>
       </Router>

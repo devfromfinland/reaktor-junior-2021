@@ -73,3 +73,12 @@ export const extractAvailabilityText = (text) => {
   const result = text.match(regex)
   return result[1]
 }
+
+export const findAvailability = (array, itemId) => {
+  for (let i = 0; i < array.length; i++) {
+    if (itemId.toUpperCase() === array[i].id.toUpperCase()) {
+      return extractAvailabilityText(array[i].DATAPAYLOAD)
+    }
+  }
+  return 'not found'
+}

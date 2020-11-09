@@ -22,7 +22,7 @@ const CategoryPage = ({ data }) => {
       </AutoSizer>
     )
   } else {
-    return <div>Waiting for data...</div>
+    return <div>Loading data...</div>
   }
 }
 

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import CategoryPage from './CategoryPage'
 import { getProductsByCategory, getAvailabilityInfo } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
-import { AppContext } from '../services/contextService'
+import { AppContext } from './services/contextService'
 import './App.css'
 
 // NOTE ON DATA

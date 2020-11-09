@@ -45,10 +45,10 @@ const App = () => {
               case 'accessories':
                 return <CategoryPage data={accessories}/>
               default:
-                return <CategoryPage />
+                return <div>404 page</div>
             }
           }}/>
-          <Route path='*' render={() => (<div>404</div>)} />
+          {/* <Route path='*' render={() => (<div>404</div>)} /> */}
         </Switch>
       </div>
     </Router>

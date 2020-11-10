@@ -30,10 +30,10 @@ const CategoryPage = () => {
       {({ height, width }) => (
         <List
           className='list'
-          height={window.innerHeight}
+          height={window.innerHeight - 105 - 16} // minus the space above (navbar height (105px), 1 scrollbar button gap (16px), header row, filter bar, etc.)
           width={width}
           itemCount={data.length}
-          itemSize={124}
+          itemSize={38}
           itemData={data}
         >
           {Item}

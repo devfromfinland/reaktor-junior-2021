@@ -11,7 +11,6 @@ import Availability from './Availability'
 */
 
 const Item = ({ data, index, style }) => {
-  
   return (
     <div style={style} className={(index % 2 === 0) ? 'item odd' : 'item'}>
       <div className='item-content'>

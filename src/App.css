@@ -1,3 +1,8 @@
+:root {
+  --red: rgb(181, 28, 49);
+  --blue: rgb(24, 68, 126); /* Finnish blue color */
+}
+
 .list {
   overflow-x: hidden; /* hide the horizontal scrollbar */
 }
@@ -6,7 +11,69 @@
   background-color: lightgray;
 }
 
+.row-header {
+  background-color: tomato;
+}
+
 .item-content {
   padding: 8px 0;
   padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.item-content div,
+.row-header div {
+  flex: 1;
+}
+
+.item-content :first-child,
+.row-header :first-child {
+  flex-grow: 3;
+}
+
+.navigation {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: var(--blue);
+}
+
+.navigation a {
+  text-decoration: none;
+  display: block;
+  padding: 8px 16px;
+  color: white;
+}
+
+.navigation a:hover,
+.navigation .active {
+  background-color: var(--red);
+}
+
+/* responsive */
+
+@media all and (max-width: 600px) {
+  .navigation {
+    justify-content: space-around;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .navigation {
+    flex-flow: column wrap;
+    padding: 0;
+  }
+  .navigation a { 
+    text-align: center; 
+    border-top: 1px solid rgba(255, 255, 255,0.3); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
+  }
+  .navigation li:last-of-type a {
+    border-bottom: none;
+  }
 }

@@ -26,10 +26,10 @@ import './App.css'
 // 'xoon': 8414 products (1 MB)
 
 // const data = fetchDataFromAPI()
-const data = fetchData()
+// const data = fetchData()
 
 const App = () => {
-  const [ context, setContext ] = useState(data)
+  const [ context, setContext ] = useState(() => fetchData())
 
   return (
     <AppContext.Provider value={{ context, setContext }}>

@@ -42,7 +42,7 @@ const App = () => {
             <Route path='/' exact render={() => (<div>Hello world</div>)}/>
             <Route path='/category/:category'>
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
-                <Suspense fallback={<div>Loading data...</div>}>
+                <Suspense fallback={<div>Loading...</div>}>
                   <CategoryPage />
                 </Suspense>
               </ErrorBoundary>

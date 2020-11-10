@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
 import Availability from './Availability'
+import LoadingIndicator from '../components/LoadingIndicator'
 
 /* Item object
   id: String
@@ -18,7 +19,7 @@ const Item = ({ data, index, style }) => {
         <div>{data[index].manufacturer}</div>
         <div>{data[index].price}</div>
         <div>{data[index].color.toString()}</div>
-        <Suspense fallback={<div>checking...</div>}>
+        <Suspense fallback={<LoadingIndicator height={10}/>}>
           <Availability manufacturer={data[index].manufacturer} id={data[index].id}/>
         </Suspense>
       </div>

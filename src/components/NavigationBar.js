@@ -1,22 +1,29 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const NavigationBar = () => {
+  const location = useLocation()
+
+  const renderMenuItem = (pathname, name) => {
+    return (
+      <li>
+        <Link
+          to={pathname}
+          className={location.pathname === pathname ? 'active' : null}
+        >
+          {name}
+        </Link>
+      </li>
+    )
+  }
+
   return (
     <nav>
       <ul class='navigation'>
-        <li>
-          <Link to='/'>Home</Link>
-        </li>
-        <li>
-          <Link to='/category/jackets'>Jackets</Link>
-        </li>
-        <li>
-          <Link to='/category/shirts'>Shirts</Link>
-        </li>
-        <li>
-          <Link to='/category/accessories'>Accessories</Link>
-        </li>
+        { renderMenuItem('/', 'Home') }
+        { renderMenuItem('/category/jackets', 'Jackets') }
+        { renderMenuItem('/category/shirts', 'Shirts') }
+        { renderMenuItem('/category/accessories', 'Accessories') }
       </ul>
     </nav>
   )

@@ -7,9 +7,22 @@ const Availability = ({ manufacturer, id }) => {
   const promise = context[manufacturer].read()
   const availability = findAvailability(promise.data.response, id)
 
+  const addStyle = (status) => {
+    switch (status) {
+      case 'INSTOCK':
+        return <span className='instock'>available</span>
+      case 'LESSTHAN10':
+        return <span className='lessthan10'>less than 10</span>
+      case 'OUTOFSTOCK':
+        return <span className='outofstock'>out of stock</span>
+      default:
+        return status
+    }
+  }
+
   return (
     <div>
-      { availability }
+      { addStyle(availability) }
     </div>
   )
 }

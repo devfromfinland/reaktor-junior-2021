@@ -70,6 +70,24 @@
   flex-grow: 3;
 }
 
+.instock {
+  color: green;
+}
+
+.lessthan10 {
+  color: orange;
+}
+
+.outofstock {
+  color: var(--red);
+}
+
+.instock,
+.lessthan10,
+.outofstock {
+  font-weight: bold;
+}
+
 .navigation {
   display: flex;
   flex-flow: row wrap;

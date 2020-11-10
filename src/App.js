@@ -4,6 +4,7 @@ import CategoryPage from './CategoryPage'
 import { fetchData } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
 import { AppContext } from './services/contextService'
+import ErrorBoundary from './components/ErrorBoundary'
 import './App.css'
 
 // NOTE ON DATA
@@ -40,9 +41,11 @@ const App = () => {
           <Switch>
             <Route path='/' exact render={() => (<div>Hello world</div>)}/>
             <Route path='/category/:category'>
-              <Suspense fallback={<div>Loading data...</div>}>
-                <CategoryPage />
-              </Suspense>
+              <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
+                <Suspense fallback={<div>Loading data...</div>}>
+                  <CategoryPage />
+                </Suspense>
+              </ErrorBoundary>
             </Route>
             <Route path='*' render={() => (<div>404</div>)} />
           </Switch>

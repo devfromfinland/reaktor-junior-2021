@@ -11,8 +11,24 @@
   background-color: lightgray;
 }
 
+.even {
+  background-color: white;
+}
+
 .row-header {
-  background-color: tomato;
+  background-color: var(--blue);
+  color: white;
+  padding: 8px 0;
+  padding-left: 10px;
+  padding-right: 16px;  /* match with content scroll-bar width */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.row-header div {
+  flex: 1;
+  font-weight: bold;
 }
 
 .item-content {
@@ -23,8 +39,7 @@
   justify-content: flex-start;
 }
 
-.item-content div,
-.row-header div {
+.item-content div {
   flex: 1;
 }
 

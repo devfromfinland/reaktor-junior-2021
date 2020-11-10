@@ -12,7 +12,7 @@ import Availability from './Availability'
 
 const Item = ({ data, index, style }) => {
   return (
-    <div style={style} className={(index % 2 === 0) ? 'item odd' : 'item'}>
+    <div style={style} className={(index % 2 === 0) ? 'odd' : 'even'}>
       <div className='item-content'>
         <div>{data[index].name}</div>
         <div>{data[index].manufacturer}</div>

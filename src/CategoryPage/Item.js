@@ -19,7 +19,7 @@ const Item = ({ data, index, style }) => {
         <div>{data[index].manufacturer}</div>
         <div>{data[index].price}</div>
         <div>{data[index].color.toString()}</div>
-        <Suspense fallback={<LoadingIndicator height={10}/>}>
+        <Suspense fallback={<div><LoadingIndicator className='small-loading-indicator'/></div>}>
           <Availability manufacturer={data[index].manufacturer} id={data[index].id}/>
         </Suspense>
       </div>

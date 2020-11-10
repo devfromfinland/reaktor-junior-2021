@@ -5,6 +5,8 @@ import { fetchData } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
 import { AppContext } from './services/contextService'
 import ErrorBoundary from './components/ErrorBoundary'
+import LoadingIndicator from './components/LoadingIndicator'
+import HomePage from './HomePage'
 import './App.css'
 
 // NOTE ON DATA
@@ -32,6 +34,17 @@ import './App.css'
 const App = () => {
   const [ context, setContext ] = useState(() => fetchData())
 
+  const LoadingScreen = () => {
+    return (
+      <div className='container'>
+        <LoadingIndicator className='loading-indicator'/>
+        <div className='loading-text'>
+          Loading...
+        </div>
+      </div>
+    )
+  }
+
   return (
     <AppContext.Provider value={{ context, setContext }}>
       <Router>
@@ -39,10 +52,10 @@ const App = () => {
           <NavigationBar />
           
           <Switch>
-            <Route path='/' exact render={() => (<div>Hello world</div>)}/>
+            <Route path='/' exact render={() => (<HomePage />)}/>
             <Route path='/category/:category'>
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense fallback={<LoadingScreen />}>
                   <CategoryPage />
                 </Suspense>
               </ErrorBoundary>

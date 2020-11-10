@@ -15,6 +15,28 @@
   background-color: white;
 }
 
+.container {
+  display: flex;
+  /* flex: 1; */
+  height: 80vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-indicator {
+  height: 50px;
+}
+
+.small-loading-indicator {
+  height: 10px;
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
 .row-header {
   background-color: var(--blue);
   color: white;

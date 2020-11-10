@@ -1,11 +1,9 @@
 import React from 'react'
-import indicator from './three-dots.svg'
+import { ReactComponent as Indicator } from './three-dots.svg'
 
-const LoadingIndicator = ({ width, height, inlineText }) => {
+const LoadingIndicator = (props) => {
   return (
-    <div>
-      <img src={indicator} alt='loading...' height={height}/> {inlineText ? inlineText : null}
-    </div>
+    <Indicator {...props} fill='#18447e'/>
   )
 }
 

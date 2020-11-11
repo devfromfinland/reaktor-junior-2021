@@ -2,7 +2,9 @@ import React from 'react'
 
 const HomePage = () => {
   return (
-    <div>Home</div>
+    <div data-testid='test003'>
+      Home
+    </div>
   )
 }
 

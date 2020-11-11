@@ -48,7 +48,7 @@ const App = () => {
   return (
     <AppContext.Provider value={{ context, setContext }}>
       <Router>
-        <div style={{ height: '100%' }}>
+        <div style={{ height: '100%' }} data-testid='test001'>
           <NavigationBar />
           
           <Switch>

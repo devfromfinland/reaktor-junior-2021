@@ -18,7 +18,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav>
+    <nav data-testid='test002'>
       <ul className='navigation'>
         { renderMenuItem('/', 'Home') }
         { renderMenuItem('/category/jackets', 'Jackets') }

@@ -10,7 +10,7 @@ const Availability = ({ manufacturer, id }) => {
   const addStyle = (status) => {
     switch (status) {
       case 'INSTOCK':
-        return <span className='instock'>available</span>
+        return <span className='instock'>in stock</span>
       case 'LESSTHAN10':
         return <span className='lessthan10'>less than 10</span>
       case 'OUTOFSTOCK':

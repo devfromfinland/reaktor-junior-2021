@@ -24,6 +24,14 @@
   align-items: center;
 }
 
+.category-container {
+  margin-top: 16px;
+}
+
+.filter-container {
+  margin-bottom: 16px;
+}
+
 .loading-indicator {
   height: 50px;
 }

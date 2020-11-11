@@ -70,7 +70,7 @@ const wrapPromise = (promise) => {
         return result
       }
     }
-  };
+  }
 }
 
 export const fetchData = () => {

@@ -49,7 +49,7 @@ const CategoryPage = () => {
         switch (key) {
           case 'name':
             if (!filters[key] || filters[key] === '') break
-            if (!item[key].includes(filters[key])) return false
+            if (!item[key].toUpperCase().includes(filters[key].toUpperCase())) return false
             break
           case 'manufacturer':
             if (!filters[key] || filters[key] === '') break

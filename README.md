@@ -1,7 +1,7 @@
 # Pre-assignment for Reaktor Junior 2021
 This is the repo for Reaktor Junior 2021's pre-assignment ([assignment link](https://www.reaktor.com/junior-dev-assignment/))
 
-In this assignment, I have built a simple web app for a clothing brand to use in their warehouses. *The main purpose of this simple web app* is to provide a tool to quickly check simple product and availability information from a single UI.
+In this assignment, I have built a simple web app for a clothing brand to use in their warehouses. **The main purpose of this simple web app is to provide a tool to quickly check simple product and availability information from a single UI.**
 
 The web app is built based on their two legacy (bad) APIs needed to implement work around any of their issues. I have also taken advantage of this assignment to try our React's Suspense feature in Concurrent Mode (which is still in experimental) for efficient data fetching and rendering
 

@@ -73,6 +73,7 @@ const wrapPromise = (promise) => {
   }
 }
 
+// to add then in axios.get of manufacturers
 export const fetchData = () => {
   let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError).then(res => res.data)
   let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError).then(res => res.data)

@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          npm build
+          npm run build
 
       - name: Configure AWS credentials from Dev account
         uses: aws-actions/configure-aws-credentials@v1

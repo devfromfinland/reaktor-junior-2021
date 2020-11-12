@@ -14,10 +14,11 @@ jobs:
       - name: Set Node.js 12.x
         uses: actions/setup-node@master
         with:
-          version: 12.x
-          
+          node-version: 12.x
+        
       - name: Test
         run: |
+          npm install
           npm test
 
       - name: Build

@@ -11,6 +11,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
+      - name: Set Node.js 12.x
+        uses: actions/setup-node@master
+        with:
+          version: 12.x
+          
       - name: Test
         run: |
           npm test

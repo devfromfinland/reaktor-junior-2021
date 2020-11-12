@@ -10,10 +10,11 @@ The web app is built based on their two legacy (bad) APIs needed to implement wo
 - [x] Data fetching from legacy APIs with *axios*
 - [x] Quick rendering a big list with *react-window*
 - [x] Quick and efficient data fetching and rendering for better user experience with *React Suspense*
-- [ ] Reduce number of API call with *React Context* and *Caching*
-- [ ] Quick product searching and data filtering
+- [x] State management with *React Context*
+- [x] Quick product searching and data filtering
+- [ ] Unit tests with **react-scripts**
+- [ ] Caching and **Progressive Web App**
 - [ ] Responsive UI
-- [ ] Unit tests
 - [ ] CI/CD with Github Actions
 - [ ] Deploy to Heroku (or AWS S3)
 

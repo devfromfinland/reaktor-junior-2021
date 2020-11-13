@@ -31,6 +31,11 @@ import './App.css'
 // const data = fetchDataFromAPI()
 // const data = fetchData()
 
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./mocks/browser')
+  worker.start()
+}
+
 const App = () => {
   const [ context, setContext ] = useState(() => fetchData())
 

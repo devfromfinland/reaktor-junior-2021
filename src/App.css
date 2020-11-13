@@ -15,7 +15,7 @@
   background-color: white;
 }
 
-.container {
+.loading-container {
   display: flex;
   /* flex: 1; */
   height: 80vh;

@@ -6,11 +6,8 @@ const NavigationBar = () => {
 
   const renderMenuItem = (pathname, name) => {
     return (
-      <li>
-        <Link
-          to={pathname}
-          className={location.pathname === pathname ? 'active' : null}
-        >
+      <li aria-label={name} className={location.pathname === pathname ? 'active' : null}>
+        <Link to={pathname}>
           {name}
         </Link>
       </li>
@@ -18,7 +15,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav data-testid='test002'>
+    <nav>
       <ul className='navigation'>
         { renderMenuItem('/', 'Home') }
         { renderMenuItem('/category/jackets', 'Jackets') }

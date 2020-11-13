@@ -3,15 +3,6 @@ import Availability from './Availability'
 import LoadingIndicator from '../components/LoadingIndicator'
 import ColoredBox from '../components/ColoredBox'
 
-/* Item object
-  id: String
-  manufacturer: String
-  name: String
-  price: Int
-  type: String ('jacket' | 'shirts' | 'accessories')
-  color: Array of String
-*/
-
 const Item = ({ data, index, style }) => {
   const Colors = ({ colors }) => {
     return (

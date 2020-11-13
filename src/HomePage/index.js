@@ -2,8 +2,8 @@ import React from 'react'
 
 const HomePage = () => {
   return (
-    <div data-testid='test003'>
-      Home
+    <div data-testid='homepage'>
+      to render homepage
     </div>
   )
 }

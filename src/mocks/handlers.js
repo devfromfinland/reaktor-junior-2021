@@ -3,6 +3,7 @@ import { rest } from 'msw'
 export const handlers = [
   rest.get('https://bad-api-assignment.reaktor.com/products/jackets', (req, res, ctx) => {
     return res(
+      // ctx.delay(2000),
       ctx.status(200),
       ctx.json([
         {
@@ -19,6 +20,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/products/shirts', (req, res, ctx) => {
     return res(
+      // ctx.delay(2000),
       ctx.status(200),
       ctx.json([
         {
@@ -35,6 +37,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/products/accessories', (req, res, ctx) => {
     return res(
+      // ctx.delay(2000),
       ctx.status(200),
       ctx.json([
         {
@@ -59,6 +62,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/availability/reps', (req, res, ctx) => {
     return res(
+      // ctx.delay(4000),
       ctx.status(200),
       ctx.json({
         code: 200,
@@ -74,6 +78,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/availability/nouke', (req, res, ctx) => {
     return res(
+      // ctx.delay(4000),
       ctx.status(200),
       ctx.json({
         code: 200,
@@ -93,6 +98,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/availability/xoon', (req, res, ctx) => {
     return res(
+      // ctx.delay(4000),
       ctx.status(200),
       ctx.json({
         code: 200,
@@ -108,6 +114,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/availability/derp', (req, res, ctx) => {
     return res(
+      // ctx.delay(4000),
       ctx.status(200),
       ctx.json({
         code: 200,
@@ -118,6 +125,7 @@ export const handlers = [
 
   rest.get('https://bad-api-assignment.reaktor.com/availability/abiplos', (req, res, ctx) => {
     return res(
+      // ctx.delay(4000),
       ctx.status(200),
       ctx.json({
         code: 200,

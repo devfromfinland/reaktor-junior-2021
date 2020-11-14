@@ -21,12 +21,12 @@ describe('navigating to category page', () => {
     fireEvent.click(screen.getByText('Accessories'))
   })
   
-  it('check loading indicator', () => {
+  it('render loading indicator', () => {
     expect(screen.getByLabelText('loading-indicator')).toBeInTheDocument()
     expect(screen.getByText('Loading...')).toBeInTheDocument()
   })
 
-  it('check navigation bar', () => {
+  it('update navigation bar', () => {
     expect(screen.queryByRole('listitem', { name: 'Home' })).not.toHaveClass('active')
     expect(screen.queryByRole('listitem', { name: 'Jackets' })).not.toHaveClass('active')
     expect(screen.queryByRole('listitem', { name: 'Shirts' })).not.toHaveClass('active')
@@ -46,7 +46,7 @@ describe('on Category Page: Accessories', () => {
     await waitFor(() => screen.getByTestId('category-page'))
   })
 
-  it('check main elements are rendered', () => {
+  it('render main elements in Category', () => {
     // filter
     expect(screen.queryByTestId('category-page')).toBeInTheDocument()
     expect(screen.queryByTestId('category-page')).toHaveTextContent('Filter by product name')
@@ -72,7 +72,7 @@ describe('on Category Page: Accessories', () => {
     expect(screen.queryAllByLabelText('item-content').length).toBe(2)
   })
 
-  it('filter by product name: 1 product match', () => {
+  it('filter by product name', () => {
     const formInput = screen.getByLabelText('input-product-name')
     const resetButton = screen.getByRole('button', { name: 'reset' })
     const filterButton = screen.getByRole('button', { name: 'filter' })
@@ -86,15 +86,8 @@ describe('on Category Page: Accessories', () => {
     expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
 
-    // Reset filter
-    fireEvent.click(resetButton)
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
-  })
-
-  it('filter by product name: 0 product match', () => {
-    // None product matched
-    fireEvent.change(screen.getByLabelText('input-product-name'), {
+    // No product match
+    fireEvent.change(formInput, {
       target: { value: 'nothing' }
     })
     fireEvent.click(screen.getByRole('button', { name: 'filter' }))
@@ -103,102 +96,121 @@ describe('on Category Page: Accessories', () => {
     expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
 
     // Reset filter
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    fireEvent.click(resetButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(2)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
   })
 
-  it('filter by manufacturer: 1 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
+  it('filter by manufacturer', () => {
+    const formInput = screen.getByLabelText('input-manufacturer')
+    const resetButton = screen.getByRole('button', { name: 'reset' })
+    const filterButton = screen.getByRole('button', { name: 'filter' })
+
+    // Only 1 product match
+    fireEvent.change(formInput, {
       target: { value: 'xoon' }
     })
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(1)
     expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
 
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
-  })
-
-  it('filter by manufacturer: 0 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
-      target: { value: 'not in the list' }
+    // No product match
+    fireEvent.change(formInput, {
+      target: { value: 'nothing' }
     })
-
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(0)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
     expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    // reset filter
+    fireEvent.click(resetButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(2)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
   })
 
-  it ('filter by min-price: 1 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-min-price'), {
+  it ('filter by price', () => {
+    const inputMinPrice = screen.getByLabelText('input-min-price')
+    const inputMaxPrice = screen.getByLabelText('input-max-price')
+    const resetButton = screen.getByRole('button', { name: 'reset' })
+    const filterButton = screen.getByRole('button', { name: 'filter' })
+
+    // One 1 product match min price
+    fireEvent.change(inputMinPrice, {
       target: { value: '40' }
     })
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(1)
     expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
 
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
-  })
-
-  it ('filter by max-price: 1 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-max-price'), {
-      target: { value: '40' }
+    // No product match min price
+    fireEvent.change(inputMinPrice, {
+      target: { value: '70' }
     })
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    // reset filter
+    fireEvent.click(resetButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+
+    // One 1 product match max price
+    fireEvent.change(inputMaxPrice, {
+      target: { value: '40' }
+    })
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(1)
     expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 1')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
 
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
-  })
-
-  it ('filter by max-price: 0 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-max-price'), {
+    // No product match max price
+    fireEvent.change(inputMaxPrice, {
       target: { value: '20' }
     })
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(0)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
     expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
-  })
-
-  it ('filter by min-price: 0 product match', () => {
-    fireEvent.change(screen.getByLabelText('input-min-price'), {
-      target: { value: '70' }
+    // One 1 product match both min and max price
+    fireEvent.change(inputMinPrice, {
+      target: { value: '20' }
     })
+    fireEvent.change(inputMaxPrice, {
+      target: { value: '40' }
+    })
+    fireEvent.click(filterButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 1')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    // No product match both min and max price
+    fireEvent.change(inputMinPrice, {
+      target: { value: '10' }
+    })
+    fireEvent.change(inputMaxPrice, {
+      target: { value: '25' }
+    })
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(0)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
     expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
-    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
-    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
   })
 
-  it('filter combination product name, manufacturer, and min-price: 1 product match', () => {
+  it('filter combination product name, manufacturer, and price', () => {
+    const resetButton = screen.getByRole('button', { name: 'reset' })
+    const filterButton = screen.getByRole('button', { name: 'filter' })
+
+    // Only 1 product match
     fireEvent.change(screen.getByLabelText('input-min-price'), {
       target: { value: '40' }
     })
@@ -206,30 +218,27 @@ describe('on Category Page: Accessories', () => {
       target: { value: 'xoon' }
     })
     fireEvent.change(screen.getByLabelText('input-product-name'), {
-      target: { value: 'accessory 2' }
+      target: { value: 'accessory' }
     })
 
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(1)
     expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
-  })
 
-  it('filter combination product name, manufacturer, and min-price: 0 product match', async () => {
-    fireEvent.change(screen.getByLabelText('input-min-price'), {
-      target: { value: '20' }
-    })
+    // No product match
     fireEvent.change(screen.getByLabelText('input-manufacturer'), {
-      target: { value: 'nouke' }
+      target: { value: 'rouke' }
     })
 
-    fireEvent.change(screen.getByLabelText('input-product-name'), {
-      target: { value: 'accessory 2' }
-    })
-
-    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    fireEvent.click(filterButton)
     expect(screen.queryAllByLabelText('item-content').length).toBe(0)
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
     expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    // reset filter
+    fireEvent.click(resetButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
   })
 })

@@ -4,6 +4,11 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import Item from './Item'
 
 const ListItems = ({ itemData }) => {
+  if (!itemData || itemData.length === 0) return (
+    <div aria-label='no-product'>
+      No product to show
+    </div>
+  )
   return (
     <AutoSizer>
       {({ height, width }) => (

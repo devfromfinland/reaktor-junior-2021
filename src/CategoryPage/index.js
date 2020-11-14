@@ -7,8 +7,8 @@ const CategoryPage = () => {
   const [ userFilters, setUserFilters ] = useState({
     manufacturer: '',
     name: '',
-    minPrice: undefined,
-    maxPrice: undefined,
+    minPrice: '',
+    maxPrice: '',
     // availability: 'INSTOCK',
     // color: []
   })
@@ -45,8 +45,8 @@ const CategoryPage = () => {
             break
           case 'minPrice':
           case 'maxPrice':
-            if (filters['minPrice'] && item['price'] < filters['minPrice']) return false
-            if (filters['maxPrice'] && item['price'] > filters['maxPrice']) return false
+            if (parseInt(filters['minPrice']) > 0 && item['price'] < parseInt(filters['minPrice'])) return false
+            if (parseInt(filters['maxPrice']) > 0 && item['price'] > parseInt(filters['maxPrice'])) return false
             break
           case 'availability':
             // todo: filter by availability
@@ -74,8 +74,8 @@ const CategoryPage = () => {
     setUserFilters({
       manufacturer: '',
       name: '',
-      minPrice: null,
-      maxPrice: null,
+      minPrice: '',
+      maxPrice: '',
       // availability: 'INSTOCK',
       // color: []
     })
@@ -133,7 +133,7 @@ const CategoryPage = () => {
             value={userFilters.minPrice}
             onChange={e => setUserFilters(userFilters => ({
               ...userFilters,
-              minPrice: parseInt(e.target.value)
+              minPrice: e.target.value
             }))}
           /> - (max)
           <input
@@ -142,7 +142,7 @@ const CategoryPage = () => {
             value={userFilters.maxPrice}
               onChange={e => setUserFilters(userFilters => ({
                 ...userFilters,
-                maxPrice: parseInt(e.target.value)
+                maxPrice: e.target.value
             }))}
           />
         </div>
@@ -163,7 +163,7 @@ const CategoryPage = () => {
 
       { renderListHeader() }
 
-      <ListItems itemData={data}/>
+      <ListItems itemData={filteredData ? filteredData : data}/>
 
     </div>
   )

@@ -35,14 +35,14 @@ describe('navigating to category page', () => {
 })
 
 describe('on Category Page: Accessories', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     render(<App />)
     
     // mock the window size for AutoSizer to render
-    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 500 })
-    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 500 })
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 1000 })
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 1000 })
 
-    fireEvent.click(screen.getByText('Accessories'))
+    fireEvent.click(screen.queryByText('Accessories'))
     await waitFor(() => screen.getByTestId('category-page'))
   })
 
@@ -70,5 +70,166 @@ describe('on Category Page: Accessories', () => {
     // list of items
     expect(screen.queryByLabelText('list-items-header')).toBeInTheDocument()
     expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+  })
+
+  it('filter by product name: 1 product match', () => {
+    const formInput = screen.getByLabelText('input-product-name')
+    const resetButton = screen.getByRole('button', { name: 'reset' })
+    const filterButton = screen.getByRole('button', { name: 'filter' })
+
+    // Only 1 product match
+    fireEvent.change(formInput, {
+      target: { value: 'accessory 2' }
+    })
+    fireEvent.click(filterButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
+
+    // Reset filter
+    fireEvent.click(resetButton)
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it('filter by product name: 0 product match', () => {
+    // None product matched
+    fireEvent.change(screen.getByLabelText('input-product-name'), {
+      target: { value: 'nothing' }
+    })
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    // Reset filter
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it('filter by manufacturer: 1 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
+      target: { value: 'xoon' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it('filter by manufacturer: 0 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
+      target: { value: 'not in the list' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it ('filter by min-price: 1 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-min-price'), {
+      target: { value: '40' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it ('filter by max-price: 1 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-max-price'), {
+      target: { value: '40' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 1')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it ('filter by max-price: 0 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-max-price'), {
+      target: { value: '20' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it ('filter by min-price: 0 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-min-price'), {
+      target: { value: '70' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'reset' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(2)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
+  })
+
+  it('filter combination product name, manufacturer, and min-price: 1 product match', () => {
+    fireEvent.change(screen.getByLabelText('input-min-price'), {
+      target: { value: '40' }
+    })
+    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
+      target: { value: 'xoon' }
+    })
+    fireEvent.change(screen.getByLabelText('input-product-name'), {
+      target: { value: 'accessory 2' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    expect(screen.queryAllByLabelText('item-content').length).toBe(1)
+    expect(screen.queryAllByLabelText('item-content')[0]).toHaveTextContent('accessory 2')
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('1')
+  })
+
+  it('filter combination product name, manufacturer, and min-price: 0 product match', async () => {
+    fireEvent.change(screen.getByLabelText('input-min-price'), {
+      target: { value: '20' }
+    })
+    fireEvent.change(screen.getByLabelText('input-manufacturer'), {
+      target: { value: 'nouke' }
+    })
+
+    fireEvent.change(screen.getByLabelText('input-product-name'), {
+      target: { value: 'accessory 2' }
+    })
+
+    fireEvent.click(screen.getByRole('button', { name: 'filter' }))
+    // expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    // expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    // expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
   })
 })

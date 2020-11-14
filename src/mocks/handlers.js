@@ -45,7 +45,7 @@ export const handlers = [
           type: 'accessories',
           name: 'Cool accessory 1',
           color: ['yellow'],
-          price: 60,
+          price: 30,
           manufacturer: 'nouke'
         },
         {

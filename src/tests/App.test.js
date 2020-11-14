@@ -228,8 +228,8 @@ describe('on Category Page: Accessories', () => {
     })
 
     fireEvent.click(screen.getByRole('button', { name: 'filter' }))
-    // expect(screen.queryAllByLabelText('item-content').length).toBe(0)
-    // expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
-    // expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
+    expect(screen.queryAllByLabelText('item-content').length).toBe(0)
+    expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('0')
+    expect(screen.queryByLabelText('no-product')).toBeInTheDocument()
   })
 })

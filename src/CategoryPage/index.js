@@ -7,8 +7,8 @@ const CategoryPage = () => {
   const [ userFilters, setUserFilters ] = useState({
     manufacturer: '',
     name: '',
-    minPrice: null,
-    maxPrice: null,
+    minPrice: undefined,
+    maxPrice: undefined,
     // availability: 'INSTOCK',
     // color: []
   })
@@ -85,7 +85,7 @@ const CategoryPage = () => {
 
   const renderListHeader = () => {
     return (
-      <div className='row-header'>
+      <div className='row-header' aria-label='list-items-header'>
         <div>Product name</div>
         <div>Manufaturer</div>
         <div>Price</div>
@@ -96,12 +96,13 @@ const CategoryPage = () => {
   }
   
   return (
-    <div className='category-container'>
+    <div className='category-container' data-testid='category-page'>
       <div className='filter-container'>
         <div>
           Filter by product name:
           <input
             type='text'
+            aria-label='input-product-name'
             value={userFilters.name}
             onChange={e => setUserFilters(userFilters => ({
               ...userFilters,
@@ -114,6 +115,7 @@ const CategoryPage = () => {
           Filter by manufacturer:
           <input
             type='text'
+            aria-label='input-manufacturer'
             value={userFilters.manufacturer}
             onChange={e => setUserFilters(userFilters => ({
               ...userFilters,
@@ -127,6 +129,7 @@ const CategoryPage = () => {
           Filter by price: (min) 
           <input
             type='text'
+            aria-label='input-min-price'
             value={userFilters.minPrice}
             onChange={e => setUserFilters(userFilters => ({
               ...userFilters,
@@ -135,6 +138,7 @@ const CategoryPage = () => {
           /> - (max)
           <input
             type='text'
+            aria-label='input-max-price'
             value={userFilters.maxPrice}
               onChange={e => setUserFilters(userFilters => ({
                 ...userFilters,
@@ -144,19 +148,23 @@ const CategoryPage = () => {
         </div>
 
         <div>
-          <button onClick={() => handleFilterData(data, userFilters)}>
+          <button onClick={() => handleFilterData(data, userFilters)} name='button-filter'>
             filter
           </button>
-          <button onClick={handleReset}>reset</button>
+          <button onClick={handleReset} name='button-reset'>
+            reset
+          </button>
         </div>
       </div>
 
       <div>
-        <b># of products:</b> { filteredData ? filteredData.length : data.length }
+        <b># of products:</b> <span aria-label='list-items-length'>{ filteredData ? filteredData.length : data.length }</span>
       </div>
 
       { renderListHeader() }
+
       <ListItems itemData={data}/>
+
     </div>
   )
 }

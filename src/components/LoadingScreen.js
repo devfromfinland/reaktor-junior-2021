@@ -3,7 +3,7 @@ import LoadingIndicator from '../components/LoadingIndicator'
 
 const LoadingScreen = () => {
   return (
-    <div className='loading-container'>
+    <div className='loading-container' aria-label='loading-indicator'>
       <LoadingIndicator className='loading-indicator'/>
       <div className='loading-text'>
         Loading...

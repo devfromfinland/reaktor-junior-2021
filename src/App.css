@@ -1,6 +1,7 @@
 :root {
   --red: rgb(181, 28, 49);
   --blue: rgb(24, 68, 126); /* Finnish blue color */
+  --light-red: rgba(181, 28, 49, 0.5);
 }
 
 .list {
@@ -83,7 +84,7 @@
 }
 
 .lessthan10 {
-  color: orange;
+  color: var(--light-red);
 }
 
 .outofstock {

@@ -66,12 +66,12 @@ registerRoute(
 registerRoute(
   ({ url }) => url.pathname.startsWith('/products/'),
   new StaleWhileRevalidate({
-    cacheName: 'products-request',
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 60 * 60
-      })
-    ]
+    cacheName: 'product-request',
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     maxAgeSeconds: 60 * 60
+    //   })
+    // ]
   })
 )
 
@@ -79,12 +79,12 @@ registerRoute(
 registerRoute(
   ({ url }) => url.pathname.startsWith('/availability/'),
   new StaleWhileRevalidate({
-    cacheName: 'products-request',
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 60 * 5
-      })
-    ]
+    cacheName: 'availability-request',
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     maxAgeSeconds: 60 * 5
+    //   })
+    // ]
   })
 )
 

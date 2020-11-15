@@ -16,7 +16,12 @@ const CategoryPage = () => {
     return <Redirect to='/' />
   }
 
-  let { data } = context[category].read()
+  let promiseData = context[category] ? context[category].read() : null
+
+  if (!promiseData) {
+    console.log('Category variable was not set up')
+    return <div>Error loading page. Please contact Technical Support and let us know this error!</div>
+  }
 
   const handleFilterData = (rawData) => {
     if (!rawData) console.log('data is null')
@@ -47,7 +52,6 @@ const CategoryPage = () => {
 
     setFilteredData(copiedData)
   }
-
 
   const handleReset = () => {
     setMinPrice('')
@@ -111,7 +115,7 @@ const CategoryPage = () => {
         </div>
 
         <div>
-          <button onClick={() => handleFilterData(data)} name='button-filter'>
+          <button onClick={() => handleFilterData(promiseData.data)} name='button-filter'>
             filter
           </button>
           <button onClick={handleReset} name='button-reset'>
@@ -121,12 +125,12 @@ const CategoryPage = () => {
       </div>
 
       <div>
-        <b># of products:</b> <span aria-label='list-items-length'>{ filteredData ? filteredData.length : data.length }</span>
+        <b># of products:</b> <span aria-label='list-items-length'>{ filteredData ? filteredData.length : promiseData.data.length }</span>
       </div>
 
       { renderListHeader() }
 
-      <ListItems itemData={filteredData ? filteredData : data}/>
+      <ListItems itemData={filteredData ? filteredData : promiseData.data}/>
 
     </div>
   )

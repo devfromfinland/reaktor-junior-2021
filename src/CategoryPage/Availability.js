@@ -4,8 +4,8 @@ import { findAvailability } from '../utils/helpers'
 
 const Availability = ({ manufacturer, id }) => {
   const { context } = useAppContext()
-  const promise = context[manufacturer].read()
-  const availability = findAvailability(promise.data.response, id)
+  const promise = context[manufacturer]? context[manufacturer].read() : null
+  const availability = promise ? findAvailability(promise.data.response, id) : 'Fatal Error'
 
   const addStyle = (status) => {
     switch (status) {
@@ -15,6 +15,9 @@ const Availability = ({ manufacturer, id }) => {
         return <span className='lessthan10'>less than 10</span>
       case 'OUTOFSTOCK':
         return <span className='outofstock'>out of stock</span>
+      case 'Fatal Error':
+        console.log('Error: Availability variable was not set up')
+        return <span className='outofstock'>Error!</span>
       default:
         return status
     }

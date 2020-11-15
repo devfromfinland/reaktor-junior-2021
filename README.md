@@ -12,9 +12,9 @@ The web app is built based on their two legacy (bad) APIs needed to implement wo
 - [x] Quick and efficient data fetching and rendering for better user experience with *React Suspense*
 - [x] State management with *React Context*
 - [x] Quick product searching and data filtering
-- [x] Deploy website to *AWS S3* with [custom domain](https://junior-reaktor.ykitest.fi) (using Cloudfront and Route 53)
+- [x] Deploy website to *AWS S3* with [custom domain](https://junior-reaktor.ykitest.fi) (using Cloudfront, Certificate Manager and Route 53)
 - [x] CI/CD with *Github Actions*
-- [ ] Unit tests with *react-scripts* ([link](https://testing-library.com/docs/react-testing-library/intro))
+- [x] Unit tests with *react-scripts* ([link](https://testing-library.com/docs/react-testing-library/intro))
 - [ ] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
 - [ ] Measuring performance and improve with *web-vitals* ?? ([link](https://web.dev/vitals/))
 - [ ] Responsive UI (viewable in small mobile screen)

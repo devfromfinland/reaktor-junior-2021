@@ -7,8 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
 import HomePage from './HomePage'
 import './App.css'
-// import CategoryPage from './CategoryPage'
-const CategoryPage = React.lazy(() => import('./CategoryPage'))
+import CategoryPage from './CategoryPage'
 
 // use mock API for development
 // if (process.env.NODE_ENV === 'development') {

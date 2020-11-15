@@ -4,8 +4,8 @@ import App from '../App'
 
 it('render main elements in root', () => {
   render(<App />)
-  expect(screen.queryByTestId('root-container')).toBeInTheDocument()
-  expect(screen.queryByTestId('homepage')).toBeInTheDocument()
+  expect(screen.getByLabelText('root-container')).toBeInTheDocument()
+  expect(screen.getByLabelText('homepage')).toBeInTheDocument()
   expect(screen.queryByRole('navigation')).toBeInTheDocument()
 
   // check active navigation item is Home
@@ -43,15 +43,15 @@ describe('on Category Page: Accessories', () => {
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 1000 })
 
     fireEvent.click(screen.queryByText('Accessories'))
-    await waitFor(() => screen.getByTestId('category-page'))
+    await waitFor(() => screen.getByLabelText('category-page'))
   })
 
   it('render main elements in Category', () => {
     // filter
-    expect(screen.queryByTestId('category-page')).toBeInTheDocument()
-    expect(screen.queryByTestId('category-page')).toHaveTextContent('Filter by product name')
-    expect(screen.queryByTestId('category-page')).toHaveTextContent('Filter by manufacturer')
-    expect(screen.queryByTestId('category-page')).toHaveTextContent('Filter by price')
+    expect(screen.queryByLabelText('category-page')).toBeInTheDocument()
+    expect(screen.queryByLabelText('category-page')).toHaveTextContent('Filter by product name')
+    expect(screen.queryByLabelText('category-page')).toHaveTextContent('Filter by manufacturer')
+    expect(screen.queryByLabelText('category-page')).toHaveTextContent('Filter by price')
 
     // input
     expect(screen.queryByLabelText('input-product-name')).toBeInTheDocument()
@@ -64,7 +64,7 @@ describe('on Category Page: Accessories', () => {
     expect(screen.queryByRole('button', { name: 'reset' })).toBeInTheDocument()
 
     // summary, number of product
-    expect(screen.queryByTestId('category-page')).toHaveTextContent('# of products')
+    expect(screen.queryByLabelText('category-page')).toHaveTextContent('# of products')
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
 
     // list of items

@@ -71,7 +71,7 @@ const CategoryPage = () => {
   }
   
   return (
-    <div className='category-container' data-testid='category-page'>
+    <div className='category-container' aria-label='category-page'>
       <div className='filter-container'>
         <div>
           Filter by product name:

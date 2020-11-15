@@ -1,6 +1,5 @@
 import React, { useState, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import CategoryPage from './CategoryPage'
 import { fetchData } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
 import { AppContext } from './services/contextService'
@@ -8,6 +7,8 @@ import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
 import HomePage from './HomePage'
 import './App.css'
+// import CategoryPage from './CategoryPage'
+const CategoryPage = React.lazy(() => import('./CategoryPage'))
 
 // use mock API for development
 // if (process.env.NODE_ENV === 'development') {

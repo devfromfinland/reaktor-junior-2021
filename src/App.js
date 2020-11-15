@@ -15,8 +15,10 @@ import CategoryPage from './CategoryPage'
 //   worker.start()
 // }
 
+const data = fetchData()
+
 const App = () => {
-  const [ context, setContext ] = useState(() => fetchData())
+  const [ context, setContext ] = useState(data)
 
   return (
     <AppContext.Provider value={{ context, setContext }}>

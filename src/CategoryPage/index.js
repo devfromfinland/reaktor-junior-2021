@@ -16,7 +16,7 @@ const CategoryPage = () => {
     return <Redirect to='/' />
   }
 
-  let data = context[category].read()
+  let { data } = context[category].read()
 
   const handleFilterData = (rawData) => {
     if (!rawData) console.log('data is null')

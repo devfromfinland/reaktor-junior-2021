@@ -75,9 +75,9 @@ const wrapPromise = (promise) => {
 
 // to add then in axios.get of manufacturers
 export const fetchData = () => {
-  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError).then(res => res.data)
-  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError).then(res => res.data)
-  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError).then(res => res.data)
+  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError)
+  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError)
+  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError)
   let repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
   let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
   let noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)

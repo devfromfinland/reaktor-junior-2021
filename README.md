@@ -15,10 +15,12 @@ The web app is built based on their two legacy (bad) APIs needed to implement wo
 - [x] Deploy website to *AWS S3* with [custom domain](https://junior-reaktor.ykitest.fi) (using Cloudfront, Certificate Manager and Route 53)
 - [x] CI/CD with *Github Actions*
 - [x] Unit tests with *react-scripts* ([link](https://testing-library.com/docs/react-testing-library/intro))
-- [ ] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
-- [ ] Measuring performance and improve with *web-vitals* ?? ([link](https://web.dev/vitals/))
+- [x] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
+- [x] Improve performance and loading speed, measuring with *web-vitals* ?? ([link](https://web.dev/vitals/))
 - [ ] Responsive UI (viewable in small mobile screen)
-<!-- todo: add linting -->
+- [ ] Reload website when cache is updated (e.g. availability, new product)
+- [ ] Filter product by colors
+- [ ] Filter product by availability
 
 ## To run this app:
 Run `npm install` to install dependencies

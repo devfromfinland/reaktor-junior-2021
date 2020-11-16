@@ -37,4 +37,7 @@ jobs:
 
       - name: Deploy build to S3
         run: |
-          aws s3 sync build s3://junior-reaktor.ykitest.fi --acl public-read --delete
+          aws s3 sync build s3://junior-reaktor.ykitest.fi --delete
+          aws s3 cp build/index.html s3://junior-reaktor.ykitest.fi --cache-control no-store
+          aws s3 cp build/service-worker.js s3://junior-reaktor.ykitest.fi --cache-control no-store
+          aws s3 cp build/service-worker.js.map s3://junior-reaktor.ykitest.fi --cache-control no-store

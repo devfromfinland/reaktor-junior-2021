@@ -7,11 +7,12 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+// import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 import { clientsClaim } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
 import { registerRoute } from 'workbox-routing'
-import { StaleWhileRevalidate } from 'workbox-strategies'
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies'
 
 clientsClaim()
 
@@ -76,9 +77,10 @@ registerRoute(
 )
 
 // cache product availability, cache expires every 5 minutes (in sync with server)
+// todo: should not save cache if response code is 204 or the content is empty
 registerRoute(
   ({ url }) => url.pathname.startsWith('/availability/'),
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     cacheName: 'availability-request',
     // plugins: [
     //   new ExpirationPlugin({
@@ -95,3 +97,47 @@ self.addEventListener('message', (event) => {
     self.skipWaiting()
   }
 })
+
+// Attempt to filter bad response (code 204 or no body)
+// self.addEventListener('fetch', e => {
+//   const { request } = e;
+//   const url = new URL(request.url);
+
+//   console.log('url origin', url.origin)
+//   console.log('location origin', location.origin)
+//   console.log('url pathname', url.pathname)
+
+//   if (url.pathname.startsWith('/availability')) {
+//     // 'network first' cache strategy
+//     e.respondWith(
+//       fetch(e.request)
+//         .then(res => {
+//           // work around response code 204
+//           // if response is 204 (has no body), then serve cached data
+//           // if there is data, update cache
+//           console.log(e.request, 'has res.bodyUsed', res)
+
+//           if (res.bodyUsed) {
+//             // Make copy/clone of response
+//             const resClone = res.clone()
+
+//             // Open cache
+//             caches
+//               .open('availability-request')
+//               .then(cache => cache.put(e.request, resClone))
+
+//             return res
+//           } else {
+//             // todo: handle issue when there is no initial cached data
+//             // caches.match(e.request)
+//             //   .then(res => {
+//             //     console.log('is there cached response', res)
+//             //     return res
+//             //   })
+//             throw new Error('bad response')
+//           }
+//         })
+//         .catch(err => caches.match(e.request).then(res => res))
+//     )
+//   }
+// })

@@ -78,7 +78,7 @@ const CategoryPage = () => {
     <div className='category-container' aria-label='category-page'>
       <div className='filter-container'>
         <div>
-          Filter by product name:
+          Filter by product name:{' '}
           <input
             type='text'
             aria-label='input-product-name'
@@ -88,7 +88,7 @@ const CategoryPage = () => {
         </div>
 
         <div>
-          Filter by manufacturer:
+          Filter by manufacturer:{' '}
           <input
             type='text'
             aria-label='input-manufacturer'
@@ -99,15 +99,18 @@ const CategoryPage = () => {
 
         <div>
           {/* Note: not checking input yet (e.g. min < max) */}
-          Filter by price: (min) 
+          Filter by price: (min){' '}
           <input
             type='text'
+            style={{ width: '50px '}}
             aria-label='input-min-price'
             value={minPrice}
             onChange={e => setMinPrice(e.target.value)}
-          /> - (max)
+          />
+          {' -'} (max){' '}
           <input
             type='text'
+            style={{ width: '50px '}}
             aria-label='input-max-price'
             value={maxPrice}
               onChange={e => setMaxPrice(e.target.value)}
@@ -115,10 +118,10 @@ const CategoryPage = () => {
         </div>
 
         <div>
-          <button onClick={() => handleFilterData(promiseData.data)} name='button-filter'>
+          <button onClick={() => handleFilterData(promiseData.data)} name='button-filter' className='main-button'>
             filter
           </button>
-          <button onClick={handleReset} name='button-reset'>
+          <button onClick={handleReset} name='button-reset' className='main-button'>
             reset
           </button>
         </div>

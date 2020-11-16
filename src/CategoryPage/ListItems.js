@@ -15,7 +15,7 @@ const ListItems = ({ itemData }) => {
         <List
           className='list'
           data-testid='list-items'
-          height={window.innerHeight - 227} // minus the space above (navbar height (105px), filter, 1 scrollbar button gap (16px), header row, filter bar, etc.)
+          height={window.innerHeight - 232} // minus the space above (navbar height (105px), filter, 1 scrollbar button gap (16px), header row, filter bar, etc.)
           width={width}
           itemCount={itemData.length}
           itemSize={38}

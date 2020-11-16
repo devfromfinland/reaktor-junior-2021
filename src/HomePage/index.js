@@ -12,14 +12,14 @@ const HomePage = () => {
         <li>Quickly check product availability information from a single UI with filters</li>
         <li>Available offline, data will be updated once user has internet connection again</li>
         <li>Improved User Experience and Loading Speed</li>
+        <li>Implement work around for bad HTTP Response (code 204, no body content)</li>
+        <li>Viewable in mobile (I didn't want to spend too much time on this)</li>
       </ul>
 
-      <h3>New features under development:</h3>
+      <h3>Features under development:</h3>
       <ul>
-        <li>Responsive User Interface, available for mobile users</li>
         <li>Filter product by colors</li>
         <li>Filter product by availability</li>
-        <li>Implement work around for HTTP Response code 204 for GET request</li>
       </ul>
     </div>
   )

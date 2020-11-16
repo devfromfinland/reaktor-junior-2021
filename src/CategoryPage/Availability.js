@@ -39,11 +39,11 @@ const Availability = ({ manufacturer, id }) => {
   const addStyle = (status) => {
     switch (status) {
       case 'INSTOCK':
-        return <span className='instock'>in stock</span>
+        return <span className='instock'>yes</span>
       case 'LESSTHAN10':
-        return <span className='lessthan10'>less than 10</span>
+        return <span className='lessthan10'>{'< 10'}</span>
       case 'OUTOFSTOCK':
-        return <span className='outofstock'>out of stock</span>
+        return <span className='outofstock'>no</span>
       case 'Fatal Error':
         console.log('Error: Availability variable was not set up')
         return <span className='outofstock'>Error!</span>

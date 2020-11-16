@@ -17,7 +17,7 @@ The web app is built based on their two legacy (bad) APIs needed to implement wo
 - [x] Unit tests with *react-scripts* ([link](https://testing-library.com/docs/react-testing-library/intro))
 - [x] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
 - [x] Improve performance and loading speed, measuring with *web-vitals* ?? ([link](https://web.dev/vitals/))
-- [ ] Responsive UI (viewable in small mobile screen)
+- [x] Responsive UI (viewable in small mobile screen)
 - [ ] Add notification, reload website, refresh cache when there is an update (e.g. availability, new product) [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent)
 - [ ] Filter product by colors
 - [ ] Filter product by availability

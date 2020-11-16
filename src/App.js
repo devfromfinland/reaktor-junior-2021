@@ -20,6 +20,7 @@ const data = fetchData()
 const App = ({ testData }) => {
   const [ context, setContext ] = useState(process.env.NODE_ENV === 'test' ? testData : data)
 
+
   return (
     <AppContext.Provider value={{ context, setContext }}>
       <Router>

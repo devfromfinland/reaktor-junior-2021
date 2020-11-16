@@ -5,47 +5,7 @@ const forcedError = false
 const apiUrl = 'https://bad-api-assignment.reaktor.com'
 const headerForcedError = forcedError ? { headers: { 'x-force-error-mode': 'all' }} : null
 
-export const getProductsByCategory = async (category) => {
-  try {
-    const res = forcedError
-      ? await axios.get(`${apiUrl}/products/${category}`, {
-        headers: {
-          'x-force-error-mode': 'all'
-        }
-      })
-      : await axios.get(`${apiUrl}/products/${category}`)
-
-    // const { count, manufacturers } = countManufacturers(res.data)
-    // console.log(`${category} has ${count} manufacturers`)
-    // console.log('manufacturers:', manufacturers)
-
-    return res.data
-  } catch (err) {
-    // todo: handle err
-    console.log('error', err)
-  }
-}
-
-export const getAvailabilityInfo = async (manufacturer) => {
-  try {
-    const res = forcedError
-      ? await axios.get(`${apiUrl}/availability/${manufacturer}`, {
-        headers: {
-          'x-force-error-mode': 'all'
-        }
-      })
-      : await axios.get(`${apiUrl}/availability/${manufacturer}`)
-    
-    // console.log(res)
-    const result = convertArrayToObject(res.data.response, 'id')
-    // console.log('result', result)
-    return result
-  } catch (err) {
-    console.log('error', err)
-  }
-}
-
-// temporarily used for learning React Suspend
+// temporarily used for learning React Suspense
 // check out: https://codesandbox.io/s/frosty-hermann-bztrp
 const wrapPromise = (promise) => {
   let status = 'pending'
@@ -75,9 +35,9 @@ const wrapPromise = (promise) => {
 
 // to add then in axios.get of manufacturers
 export const fetchData = () => {
-  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError).then(res => res.data)
-  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError).then(res => res.data)
-  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError).then(res => res.data)
+  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError)
+  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError)
+  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError)
   let repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
   let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
   let noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)
@@ -93,5 +53,52 @@ export const fetchData = () => {
     nouke: wrapPromise(noukePromise),
     derp: wrapPromise(derpPromise),
     xoon: wrapPromise(xoonPromise),
+  }
+}
+
+export const fetchAvailability = (manufacturer) => {
+  let promise = axios.get(`${apiUrl}/availability/${manufacturer}`)
+  return wrapPromise(promise)
+}
+
+// not in used
+export const getProductsByCategory = async (category) => {
+  try {
+    const res = forcedError
+      ? await axios.get(`${apiUrl}/products/${category}`, {
+        headers: {
+          'x-force-error-mode': 'all'
+        }
+      })
+      : await axios.get(`${apiUrl}/products/${category}`)
+
+    // const { count, manufacturers } = countManufacturers(res.data)
+    // console.log(`${category} has ${count} manufacturers`)
+    // console.log('manufacturers:', manufacturers)
+
+    return res.data
+  } catch (err) {
+    // todo: handle err
+    console.log('error', err)
+  }
+}
+
+// not in used
+export const getAvailabilityInfo = async (manufacturer) => {
+  try {
+    const res = forcedError
+      ? await axios.get(`${apiUrl}/availability/${manufacturer}`, {
+        headers: {
+          'x-force-error-mode': 'all'
+        }
+      })
+      : await axios.get(`${apiUrl}/availability/${manufacturer}`)
+    
+    // console.log(res)
+    const result = convertArrayToObject(res.data.response, 'id')
+    // console.log('result', result)
+    return result
+  } catch (err) {
+    console.log('error', err)
   }
 }

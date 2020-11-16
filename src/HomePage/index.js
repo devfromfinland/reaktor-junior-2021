@@ -19,7 +19,7 @@ const HomePage = () => {
         <li>Responsive User Interface, available for mobile users</li>
         <li>Filter product by colors</li>
         <li>Filter product by availability</li>
-        <li>Handle error: not found product availability</li>
+        <li>Implement work around for HTTP Response code 204 for GET request</li>
       </ul>
     </div>
   )

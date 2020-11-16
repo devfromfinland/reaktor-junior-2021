@@ -5,6 +5,7 @@ export const handlers = [
     return res(
       // ctx.delay(2000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json([
         {
           id: 'item01',
@@ -22,6 +23,7 @@ export const handlers = [
     return res(
       // ctx.delay(2000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json([
         {
           id: 'item02',
@@ -39,6 +41,7 @@ export const handlers = [
     return res(
       // ctx.delay(2000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json([
         {
           id: 'item03',
@@ -64,6 +67,7 @@ export const handlers = [
     return res(
       // ctx.delay(4000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json({
         code: 200,
         response: [
@@ -80,6 +84,7 @@ export const handlers = [
     return res(
       // ctx.delay(4000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json({
         code: 200,
         response: [
@@ -100,6 +105,7 @@ export const handlers = [
     return res(
       // ctx.delay(4000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json({
         code: 200,
         response: [
@@ -116,6 +122,7 @@ export const handlers = [
     return res(
       // ctx.delay(4000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json({
         code: 200,
         response: []
@@ -127,6 +134,7 @@ export const handlers = [
     return res(
       // ctx.delay(4000),
       ctx.status(200),
+      ctx.set('Access-Control-Allow-Origin', '*'),
       ctx.json({
         code: 200,
         response: []

@@ -17,8 +17,8 @@ import CategoryPage from './CategoryPage'
 
 const data = fetchData()
 
-const App = () => {
-  const [ context, setContext ] = useState(data)
+const App = ({ testData }) => {
+  const [ context, setContext ] = useState(process.env.NODE_ENV === 'test' ? testData : data)
 
   return (
     <AppContext.Provider value={{ context, setContext }}>
@@ -31,7 +31,7 @@ const App = () => {
             <Route path='/category/:category'>
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
                 <Suspense fallback={<LoadingScreen />}>
-                  <CategoryPage reload={context['reload']}/>
+                  <CategoryPage/>
                 </Suspense>
               </ErrorBoundary>
             </Route>

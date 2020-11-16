@@ -15,8 +15,11 @@ import CategoryPage from './CategoryPage'
 //   worker.start()
 // }
 
-const App = () => {
-  const [ context, setContext ] = useState(() => fetchData())
+const data = fetchData()
+
+const App = ({ testData }) => {
+  const [ context, setContext ] = useState(process.env.NODE_ENV === 'test' ? testData : data)
+
 
   return (
     <AppContext.Provider value={{ context, setContext }}>
@@ -29,7 +32,7 @@ const App = () => {
             <Route path='/category/:category'>
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
                 <Suspense fallback={<LoadingScreen />}>
-                  <CategoryPage />
+                  <CategoryPage/>
                 </Suspense>
               </ErrorBoundary>
             </Route>

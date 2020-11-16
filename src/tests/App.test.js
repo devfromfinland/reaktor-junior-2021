@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import App from '../App'
+import { fetchData } from '../services/categoryService'
 
 it('render main elements in root', () => {
   render(<App />)
@@ -17,7 +18,10 @@ it('render main elements in root', () => {
 
 describe('navigating to category page', () => {
   beforeEach(() => {
-    render(<App />)
+    const testData = fetchData()
+    render(
+      <App testData={testData}/>
+    )
     fireEvent.click(screen.getByText('Accessories'))
   })
   
@@ -36,7 +40,10 @@ describe('navigating to category page', () => {
 
 describe('on Category Page: Accessories', () => {
   beforeEach(async () => {
-    render(<App />)
+    const testData = fetchData()
+    render(
+      <App testData={testData}/>
+    )
     
     // mock the window size for AutoSizer to render
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 1000 })

@@ -1,9 +1,13 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react'
 
 class ErrorBoundary extends React.Component {
-  state = {
-    hasError: false,
-    error: null
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasError: false,
+      // error: null
+    }
   }
 
   static getDerivedStateFromError(error) {

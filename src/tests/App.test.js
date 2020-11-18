@@ -1,5 +1,7 @@
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import {
+  render, screen, fireEvent
+} from '@testing-library/react'
 import App from '../App'
 import { fetchData } from '../services/categoryService'
 
@@ -20,11 +22,11 @@ describe('navigating to category page', () => {
   beforeEach(() => {
     const testData = fetchData()
     render(
-      <App testData={testData}/>
+      <App testData={testData} />
     )
     fireEvent.click(screen.getByText('Accessories'))
   })
-  
+
   it('render loading indicator', () => {
     expect(screen.getByLabelText('loading-indicator')).toBeInTheDocument()
     expect(screen.getByText('Loading...')).toBeInTheDocument()
@@ -42,15 +44,15 @@ describe('on Category Page: Accessories', () => {
   beforeEach(async () => {
     const testData = fetchData()
     render(
-      <App testData={testData}/>
+      <App testData={testData} />
     )
-    
+
     // mock the window size for AutoSizer to render
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 1000 })
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 1000 })
 
     fireEvent.click(screen.queryByText('Accessories'))
-    await waitFor(() => screen.getByLabelText('category-page'))
+    await screen.findByLabelText('category-page')
   })
 
   it('render main elements in Category', () => {
@@ -138,7 +140,7 @@ describe('on Category Page: Accessories', () => {
     expect(screen.queryByLabelText('list-items-length')).toHaveTextContent('2')
   })
 
-  it ('filter by price', () => {
+  it('filter by price', () => {
     const inputMinPrice = screen.getByLabelText('input-min-price')
     const inputMaxPrice = screen.getByLabelText('input-max-price')
     const resetButton = screen.getByRole('button', { name: 'reset' })

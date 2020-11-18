@@ -3,7 +3,7 @@ import { ReactComponent as Indicator } from './three-dots.svg'
 
 const LoadingIndicator = (props) => {
   return (
-    <Indicator {...props} fill='#18447e'/>
+    <Indicator {...props} fill="#18447e" />
   )
 }
 

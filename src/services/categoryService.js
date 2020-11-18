@@ -3,19 +3,19 @@ import { convertArrayToObject } from '../utils/helpers'
 
 const forcedError = false
 const apiUrl = 'https://bad-api-assignment.reaktor.com'
-const headerForcedError = forcedError ? { headers: { 'x-force-error-mode': 'all' }} : null
+const headerForcedError = forcedError ? { headers: { 'x-force-error-mode': 'all' } } : null
 
 // temporarily used for learning React Suspense
 // check out: https://codesandbox.io/s/frosty-hermann-bztrp
 const wrapPromise = (promise) => {
   let status = 'pending'
   let result
-  let suspender = promise.then(
-    r => {
+  const suspender = promise.then(
+    (r) => {
       status = 'success'
       result = r
     },
-    e => {
+    (e) => {
       status = 'error'
       result = e
     }
@@ -29,20 +29,21 @@ const wrapPromise = (promise) => {
       } else if (status === 'success') {
         return result
       }
+      return result
     }
   }
 }
 
 // to add then in axios.get of manufacturers
 export const fetchData = () => {
-  let jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError)
-  let shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError)
-  let accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError)
-  let repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
-  let abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
-  let noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)
-  let derpPromise = axios.get(`${apiUrl}/availability/derp`, headerForcedError)
-  let xoonPromise = axios.get(`${apiUrl}/availability/xoon`,headerForcedError)
+  const jacketsPromise = axios.get(`${apiUrl}/products/jackets`, headerForcedError)
+  const shirtsPromise = axios.get(`${apiUrl}/products/shirts`, headerForcedError)
+  const accessoriesPromise = axios.get(`${apiUrl}/products/accessories`, headerForcedError)
+  const repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
+  const abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
+  const noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)
+  const derpPromise = axios.get(`${apiUrl}/availability/derp`, headerForcedError)
+  const xoonPromise = axios.get(`${apiUrl}/availability/xoon`, headerForcedError)
 
   return {
     jackets: wrapPromise(jacketsPromise),
@@ -57,7 +58,7 @@ export const fetchData = () => {
 }
 
 export const fetchAvailability = (manufacturer) => {
-  let promise = axios.get(`${apiUrl}/availability/${manufacturer}`)
+  const promise = axios.get(`${apiUrl}/availability/${manufacturer}`)
   return wrapPromise(promise)
 }
 
@@ -80,6 +81,7 @@ export const getProductsByCategory = async (category) => {
   } catch (err) {
     // todo: handle err
     console.log('error', err)
+    return 'error'
   }
 }
 
@@ -93,12 +95,13 @@ export const getAvailabilityInfo = async (manufacturer) => {
         }
       })
       : await axios.get(`${apiUrl}/availability/${manufacturer}`)
-    
+
     // console.log(res)
     const result = convertArrayToObject(res.data.response, 'id')
     // console.log('result', result)
     return result
   } catch (err) {
     console.log('error', err)
+    return 'error'
   }
 }

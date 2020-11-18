@@ -1,6 +1,6 @@
 import { rest } from 'msw'
 
-export const handlers = [
+const handlers = [
   rest.get('https://bad-api-assignment.reaktor.com/products/jackets', (req, res, ctx) => {
     return res(
       // ctx.delay(2000),
@@ -142,3 +142,5 @@ export const handlers = [
     )
   }),
 ]
+
+export default handlers

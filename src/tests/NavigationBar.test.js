@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
-import NavigationBar from '../components/NavigationBar'
 import { MemoryRouter } from 'react-router-dom'
+import NavigationBar from '../components/NavigationBar'
 
 it('render all menu items', () => {
   render(
@@ -9,7 +9,7 @@ it('render all menu items', () => {
       <NavigationBar />
     </MemoryRouter>
   )
-  
+
   expect(screen.queryByRole('listitem', { name: 'Home' })).toBeInTheDocument()
   expect(screen.queryByRole('listitem', { name: 'Jackets' })).toBeInTheDocument()
   expect(screen.queryByRole('listitem', { name: 'Shirts' })).toBeInTheDocument()

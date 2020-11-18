@@ -18,24 +18,24 @@ import CategoryPage from './CategoryPage'
 const data = fetchData()
 
 const App = ({ testData }) => {
-  const [ context, setContext ] = useState(process.env.NODE_ENV === 'test' ? testData : data)
+  const [context, setContext] = useState(process.env.NODE_ENV === 'test' ? testData : data)
 
   return (
     <AppContext.Provider value={{ context, setContext }}>
       <Router>
-        <div aria-label='root-container' style={{ height: '100%' }}>
+        <div aria-label="root-container" style={{ height: '100%' }}>
           <NavigationBar />
-          
+
           <Switch>
-            <Route path='/' exact render={() => (<HomePage />)}/>
-            <Route path='/category/:category'>
+            <Route path="/" exact render={() => (<HomePage />)} />
+            <Route path="/category/:category">
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
                 <Suspense fallback={<LoadingScreen />}>
-                  <CategoryPage/>
+                  <CategoryPage />
                 </Suspense>
               </ErrorBoundary>
             </Route>
-            <Route path='*' render={() => (<div>404</div>)} />
+            <Route path="*" render={() => (<div>404</div>)} />
           </Switch>
         </div>
       </Router>

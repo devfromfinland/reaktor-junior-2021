@@ -2,12 +2,12 @@ export const checkMemSize = (item) => {
   let sizeInBytes = 0
 
   if (item) {
-    switch (typeof(item)) {
+    switch (typeof (item)) {
       case 'number':
         sizeInBytes += 8
         break
       case 'string':
-        sizeInBytes += item.length * 2  // or 4 if unicode?
+        sizeInBytes += item.length * 2 // or 4 if unicode?
         break
       case 'boolean':
         sizeInBytes += 4
@@ -18,8 +18,8 @@ export const checkMemSize = (item) => {
             sizeInBytes += checkMemSize(item[i])
           }
         } else {
-          let keys = Object.keys(item)
-          let values = Object.values(item)
+          const keys = Object.keys(item)
+          const values = Object.values(item)
 
           for (let i = 0; i < keys.length; i++) {
             sizeInBytes += keys[i].length * 2
@@ -31,13 +31,13 @@ export const checkMemSize = (item) => {
         break
     }
   }
-  
+
   return sizeInBytes
 }
 
 export const countManufacturers = (productList) => {
   let count = 0
-  let manufacturers = {}
+  const manufacturers = {}
   for (let i = 0; i < productList.length; i++) {
     if (!manufacturers[productList[i].manufacturer]) {
       count++

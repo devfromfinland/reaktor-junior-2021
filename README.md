@@ -5,6 +5,8 @@ In this assignment, I have built a simple web app for a clothing brand to use in
 
 The web app is built based on their two legacy (bad) APIs needed to implement work around any of their issues. I have also taken advantage of this assignment to try our React's Suspense feature in Concurrent Mode (which is still in experimental) for efficient data fetching and rendering
 
+Demo available at: [https://junior-reaktor.ykitest.fi/](https://junior-reaktor.ykitest.fi/)
+
 ## What have been used and applied in this app?
 - [x] Quick and simple navigation with *react-router-dom*
 - [x] Data fetching from legacy APIs with *axios*

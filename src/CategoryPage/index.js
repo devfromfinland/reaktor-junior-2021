@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
 import ListItems from './ListItems'
+import FilterBox from './FilterBox'
 
 const CategoryPage = () => {
-  const [manufacturer, setManufacturer] = useState('')
-  const [name, setName] = useState('')
-  const [minPrice, setMinPrice] = useState('')
-  const [maxPrice, setMaxPrice] = useState('')
   const [filteredData, setFilteredData] = useState(null)
   const { context } = useAppContext()
   const [topContentHeight, setTopContentHeight] = useState(null)
   const { category } = useParams()
 
   useEffect(() => {
+    // get the height above the item list (to calculate suitable heigh for virtual window)
     const topContent = document.getElementById('category-contents')
     const navBar = document.getElementById('nav-bar')
     if (topContent && navBar) {
@@ -37,13 +35,20 @@ const CategoryPage = () => {
     )
   }
 
-  const handleFilterData = (rawData) => {
-    if (!rawData) console.log('data is null')
+  const handleFilterData = ({
+    name, manufacturer, minPrice, maxPrice
+  }) => {
+    if (!promiseData.data) {
+      console.log('data is null')
+      return
+    }
 
     // shallow copy data
     // todo: switch to deep copy data
-    let copiedData = [...rawData]
+    let copiedData = [...promiseData.data]
 
+    // assuming all input are logically corrected
+    // todo: check input
     copiedData = copiedData.filter((item) => {
       if (name !== '') {
         if (!item.name.toUpperCase().includes(name.toUpperCase())) return false
@@ -67,15 +72,6 @@ const CategoryPage = () => {
     setFilteredData(copiedData)
   }
 
-  const handleReset = () => {
-    setMinPrice('')
-    setMaxPrice('')
-    setName('')
-    setManufacturer('')
-
-    setFilteredData(null)
-  }
-
   const renderListHeader = () => {
     return (
       <div className="row-header" aria-label="list-items-header">
@@ -90,62 +86,10 @@ const CategoryPage = () => {
 
   return (
     <div className="category-container" aria-label="category-page" id="category-contents">
-      <div className="filter-container">
-        <div>
-          Filter by product name:
-          {' '}
-          <input
-            type="text"
-            aria-label="input-product-name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-
-        <div>
-          Filter by manufacturer:
-          {' '}
-          <input
-            type="text"
-            aria-label="input-manufacturer"
-            value={manufacturer}
-            onChange={(e) => setManufacturer(e.target.value)}
-          />
-        </div>
-
-        <div>
-          {/* Note: not checking input yet (e.g. min < max) */}
-          Filter by price: (min)
-          {' '}
-          <input
-            type="text"
-            style={{ width: '50px ' }}
-            aria-label="input-min-price"
-            value={minPrice}
-            onChange={(e) => setMinPrice(e.target.value)}
-          />
-          {' -'}
-          {' '}
-          (max)
-          {' '}
-          <input
-            type="text"
-            style={{ width: '50px ' }}
-            aria-label="input-max-price"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <button type="button" onClick={() => handleFilterData(promiseData.data)} name="button-filter" className="main-button">
-            filter
-          </button>
-          <button type="button" onClick={handleReset} name="button-reset" className="main-button">
-            reset
-          </button>
-        </div>
-      </div>
+      <FilterBox
+        onFilterData={handleFilterData}
+        onReset={() => setFilteredData(null)}
+      />
 
       <div>
         <b># of products:</b>

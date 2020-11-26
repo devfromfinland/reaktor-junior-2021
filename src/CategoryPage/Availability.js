@@ -31,7 +31,7 @@ const Availability = ({ manufacturer, id }) => {
     setContext({
       ...context,
       [manufacturer]: refetchedData,
-      reload: !context.reload // switch flag for reload component
+      // reload: !context.reload // switch flag for reload component
     })
 
     setIsLoading(false)

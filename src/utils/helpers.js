@@ -1,3 +1,19 @@
+export const extractAvailabilityText = (text) => {
+  const regex = /<INSTOCKVALUE>(.*?)<\/INSTOCKVALUE>/
+  const result = text.match(regex)
+  return result[1]
+}
+
+export const findAvailability = (array, itemId) => {
+  for (let i = 0; i < array.length; i++) {
+    if (itemId && array[i].id && itemId.toUpperCase() === array[i].id.toUpperCase()) {
+      return extractAvailabilityText(array[i].DATAPAYLOAD)
+    }
+  }
+  return 'not found'
+}
+
+// used for checking memory size in the beginning
 export const checkMemSize = (item) => {
   let sizeInBytes = 0
 
@@ -35,6 +51,41 @@ export const checkMemSize = (item) => {
   return sizeInBytes
 }
 
+export const filterData = (filters, rawData) => {
+  const {
+    name, manufacturer, minPrice, maxPrice
+  } = filters
+
+  // shallow copy data
+  // todo: switch to deep copy data
+  let copiedData = [...rawData]
+
+  // assuming all input are logically corrected
+  // todo: check input
+  copiedData = copiedData.filter((item) => {
+    if (name !== '') {
+      if (!item.name.toUpperCase().includes(name.toUpperCase())) return false
+    }
+
+    if (manufacturer !== '') {
+      if (!item.manufacturer.toUpperCase().includes(manufacturer.toUpperCase())) return false
+    }
+
+    if (minPrice !== '') {
+      if (parseInt(minPrice, 10) > 0 && item.price < parseInt(minPrice, 10)) return false
+    }
+
+    if (maxPrice !== '') {
+      if (parseInt(maxPrice, 10) > 0 && item.price > parseInt(maxPrice, 10)) return false
+    }
+
+    return true
+  })
+
+  return copiedData
+}
+
+// not in used
 export const countManufacturers = (productList) => {
   let count = 0
   const manufacturers = {}
@@ -50,6 +101,7 @@ export const countManufacturers = (productList) => {
   }
 }
 
+// not in used
 export const convertArrayToObject = (array, key) => {
   return array.reduce((obj, item) => {
     return {
@@ -67,18 +119,3 @@ export const convertArrayToObject = (array, key) => {
 //     }
 //   }, {})
 // }
-
-export const extractAvailabilityText = (text) => {
-  const regex = /<INSTOCKVALUE>(.*?)<\/INSTOCKVALUE>/
-  const result = text.match(regex)
-  return result[1]
-}
-
-export const findAvailability = (array, itemId) => {
-  for (let i = 0; i < array.length; i++) {
-    if (itemId && array[i].id && itemId.toUpperCase() === array[i].id.toUpperCase()) {
-      return extractAvailabilityText(array[i].DATAPAYLOAD)
-    }
-  }
-  return 'not found'
-}

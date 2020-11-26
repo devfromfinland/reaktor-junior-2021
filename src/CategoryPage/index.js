@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
+import { filterData } from '../utils/helpers'
 import ListItems from './ListItems'
 import FilterBox from './FilterBox'
 
@@ -35,41 +36,16 @@ const CategoryPage = () => {
     )
   }
 
-  const handleFilterData = ({
-    name, manufacturer, minPrice, maxPrice
-  }) => {
+  const handleFilterData = (filters) => {
     if (!promiseData.data) {
       console.log('data is null')
+      // todo: show notification
       return
     }
 
-    // shallow copy data
-    // todo: switch to deep copy data
-    let copiedData = [...promiseData.data]
+    const result = filterData(filters, promiseData.data)
 
-    // assuming all input are logically corrected
-    // todo: check input
-    copiedData = copiedData.filter((item) => {
-      if (name !== '') {
-        if (!item.name.toUpperCase().includes(name.toUpperCase())) return false
-      }
-
-      if (manufacturer !== '') {
-        if (!item.manufacturer.toUpperCase().includes(manufacturer.toUpperCase())) return false
-      }
-
-      if (minPrice !== '') {
-        if (parseInt(minPrice, 10) > 0 && item.price < parseInt(minPrice, 10)) return false
-      }
-
-      if (maxPrice !== '') {
-        if (parseInt(maxPrice, 10) > 0 && item.price > parseInt(maxPrice, 10)) return false
-      }
-
-      return true
-    })
-
-    setFilteredData(copiedData)
+    setFilteredData(result)
   }
 
   const renderListHeader = () => {

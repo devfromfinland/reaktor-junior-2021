@@ -51,6 +51,40 @@ export const checkMemSize = (item) => {
   return sizeInBytes
 }
 
+export const filterData = (filters, rawData) => {
+  const {
+    name, manufacturer, minPrice, maxPrice
+  } = filters
+
+  // shallow copy data
+  // todo: switch to deep copy data
+  let copiedData = [...rawData]
+
+  // assuming all input are logically corrected
+  // todo: check input
+  copiedData = copiedData.filter((item) => {
+    if (name !== '') {
+      if (!item.name.toUpperCase().includes(name.toUpperCase())) return false
+    }
+
+    if (manufacturer !== '') {
+      if (!item.manufacturer.toUpperCase().includes(manufacturer.toUpperCase())) return false
+    }
+
+    if (minPrice !== '') {
+      if (parseInt(minPrice, 10) > 0 && item.price < parseInt(minPrice, 10)) return false
+    }
+
+    if (maxPrice !== '') {
+      if (parseInt(maxPrice, 10) > 0 && item.price > parseInt(maxPrice, 10)) return false
+    }
+
+    return true
+  })
+
+  return copiedData
+}
+
 // not in used
 export const countManufacturers = (productList) => {
   let count = 0

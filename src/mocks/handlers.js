@@ -1,3 +1,5 @@
+// mock APIs for testing and development
+// Docs: https://mswjs.io/docs/
 import { rest } from 'msw'
 
 const handlers = [

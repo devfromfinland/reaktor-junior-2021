@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
 import ListItems from './ListItems'
@@ -10,7 +10,16 @@ const CategoryPage = () => {
   const [maxPrice, setMaxPrice] = useState('')
   const [filteredData, setFilteredData] = useState(null)
   const { context } = useAppContext()
+  const [topContentHeight, setTopContentHeight] = useState(null)
   const { category } = useParams()
+
+  useEffect(() => {
+    const topContent = document.getElementById('category-contents')
+    const navBar = document.getElementById('nav-bar')
+    if (topContent && navBar) {
+      setTopContentHeight(topContent.clientHeight + navBar.clientHeight)
+    }
+  })
 
   if (category !== 'jackets' && category !== 'shirts' && category !== 'accessories') {
     return <Redirect to="/" />
@@ -80,7 +89,7 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="category-container" aria-label="category-page">
+    <div className="category-container" aria-label="category-page" id="category-contents">
       <div className="filter-container">
         <div>
           Filter by product name:
@@ -141,12 +150,14 @@ const CategoryPage = () => {
       <div>
         <b># of products:</b>
         {' '}
-        <span aria-label="list-items-length">{ filteredData ? filteredData.length : promiseData.data.length }</span>
+        <span aria-label="list-items-length">
+          { filteredData ? filteredData.length : promiseData.data.length }
+        </span>
       </div>
 
       { renderListHeader() }
 
-      <ListItems itemData={filteredData || promiseData.data} />
+      <ListItems itemData={filteredData || promiseData.data} topHeight={topContentHeight} />
 
     </div>
   )

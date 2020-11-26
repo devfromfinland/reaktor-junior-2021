@@ -28,6 +28,7 @@ const App = ({ testData }) => {
 
           <Switch>
             <Route path="/" exact render={() => (<HomePage />)} />
+
             <Route path="/category/:category">
               <ErrorBoundary fallback={<div>Error while fetching data...</div>}>
                 <Suspense fallback={<LoadingScreen />}>
@@ -35,6 +36,7 @@ const App = ({ testData }) => {
                 </Suspense>
               </ErrorBoundary>
             </Route>
+
             <Route path="*" render={() => (<div>404</div>)} />
           </Switch>
         </div>

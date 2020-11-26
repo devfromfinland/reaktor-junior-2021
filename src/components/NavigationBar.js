@@ -15,7 +15,7 @@ const NavigationBar = () => {
   }
 
   return (
-    <nav>
+    <nav id="nav-bar">
       <ul className="navigation">
         { renderMenuItem('/', 'Home') }
         { renderMenuItem('/category/jackets', 'Jackets') }

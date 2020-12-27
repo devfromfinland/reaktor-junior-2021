@@ -2,8 +2,10 @@ import axios from 'axios'
 import { convertArrayToObject } from '../utils/helpers'
 
 const forcedError = false
-const apiUrl = 'https://bad-api-assignment.reaktor.com'
-const headerForcedError = forcedError ? { headers: { 'x-force-error-mode': 'all' } } : null
+const apiUrl = 'https://bad-api-assignment.reaktor.com/v2'
+const headerForcedError = forcedError
+  ? { headers: { 'x-force-error-mode': 'all' } }
+  : null
 
 // temporarily used for learning React Suspense
 // check out: https://codesandbox.io/s/frosty-hermann-bztrp
@@ -55,6 +57,45 @@ export const fetchData = () => {
     derp: wrapPromise(derpPromise),
     xoon: wrapPromise(xoonPromise),
   }
+}
+
+export const fetchNewData = () => {
+  const glovesPromise = axios.get(`${apiUrl}/products/gloves`, headerForcedError)
+  const facemasksPromise = axios.get(`${apiUrl}/products/facemasks`, headerForcedError)
+  const beaniesPromise = axios.get(`${apiUrl}/products/beanies`, headerForcedError)
+  const repsPromise = axios.get(`${apiUrl}/availability/reps`, headerForcedError)
+  const abiplosPromise = axios.get(`${apiUrl}/availability/abiplos`, headerForcedError)
+  const noukePromise = axios.get(`${apiUrl}/availability/nouke`, headerForcedError)
+  const derpPromise = axios.get(`${apiUrl}/availability/derp`, headerForcedError)
+  const xoonPromise = axios.get(`${apiUrl}/availability/xoon`, headerForcedError)
+
+  return {
+    gloves: wrapPromise(glovesPromise),
+    facemasks: wrapPromise(facemasksPromise),
+    beanies: wrapPromise(beaniesPromise),
+    reps: wrapPromise(repsPromise),
+    abiplos: wrapPromise(abiplosPromise),
+    nouke: wrapPromise(noukePromise),
+    derp: wrapPromise(derpPromise),
+    xoon: wrapPromise(xoonPromise),
+  }
+}
+
+export const fetchProducts = (categories) => {
+  const result = {}
+  categories.forEach((category) => {
+    // console.log('category', category)
+    result[category] = wrapPromise(axios.get(`${apiUrl}/products/${category}`, headerForcedError))
+  })
+  return result
+}
+
+export const fetchAvailabilities = (manufacturers) => {
+  const result = {}
+  manufacturers.forEach((manufacturer) => {
+    result[manufacturer] = wrapPromise(axios.get(`${apiUrl}/availability/${manufacturer}`))
+  })
+  return result
 }
 
 export const fetchAvailability = (manufacturer) => {

@@ -24,6 +24,8 @@ const CategoryPage = () => {
     return <Redirect to="/" />
   }
 
+  console.log('category', category)
+
   // eslint-disable-next-line react/destructuring-assignment
   const promiseData = context[category] ? context[category].read() : null
 

@@ -1,6 +1,6 @@
 import React, { useState, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { fetchData } from './services/categoryService'
+import { fetchNewData } from './services/categoryService'
 import NavigationBar from './components/NavigationBar'
 import { AppContext } from './services/contextService'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -14,8 +14,11 @@ import CategoryPage from './CategoryPage'
 //   const { worker } = require('./mocks/browser')
 //   worker.start()
 // }
+const categories = ['gloves', 'facemasks', 'beanies']
+// const productsData = fetchProducts()
 
-const data = fetchData()
+const data = fetchNewData()
+// const data = fetchProducts(categories)
 
 const App = ({ testData }) => {
   const [context, setContext] = useState(process.env.NODE_ENV === 'test' ? testData : data)
@@ -24,7 +27,7 @@ const App = ({ testData }) => {
     <AppContext.Provider value={{ context, setContext }}>
       <Router>
         <div aria-label="root-container" style={{ height: '100%' }}>
-          <NavigationBar />
+          <NavigationBar categories={categories} />
 
           <Switch>
             <Route path="/" exact render={() => (<HomePage />)} />

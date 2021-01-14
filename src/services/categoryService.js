@@ -1,12 +1,9 @@
 import axios from 'axios'
 
 export const CATEGORIES = ['gloves', 'facemasks', 'beanies']
-export const MANUFACTURERS = ['ippal', 'abiplos', 'niksleh', 'laion', 'okkau', 'umpante']
 
 const forcedError = false
-const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'https://bad-api-assignment.reaktor.com/v2'
-  : 'http://localhost:4000'
+const apiUrl = 'https://jyyfgl2f69.execute-api.eu-west-1.amazonaws.com/dev'
 const headerForcedError = forcedError
   ? { headers: { 'x-force-error-mode': 'all' } }
   : null
@@ -44,9 +41,6 @@ export const fetchNewData = () => {
   const result = {}
   CATEGORIES.forEach((category) => {
     result[category] = wrapPromise(axios.get(`${apiUrl}/products/${category}`, headerForcedError))
-  })
-  MANUFACTURERS.forEach((manufacturer) => {
-    result[manufacturer] = wrapPromise(axios.get(`${apiUrl}/availability/${manufacturer}`, headerForcedError))
   })
   return result
 }

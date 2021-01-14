@@ -1,6 +1,5 @@
-import React, { Suspense } from 'react'
-import Availability from './Availability'
-import LoadingIndicator from '../components/LoadingIndicator'
+import React from 'react'
+import NewAvailability from './NewAvailability'
 import ColoredBox from '../components/ColoredBox'
 
 const Item = ({ data, index, style }) => {
@@ -21,9 +20,7 @@ const Item = ({ data, index, style }) => {
         <div>
           <Colors colors={data[index].color} />
         </div>
-        <Suspense fallback={<div><LoadingIndicator className="small-loading-indicator" /></div>}>
-          <Availability manufacturer={data[index].manufacturer} id={data[index].id} />
-        </Suspense>
+        <NewAvailability status={data[index].availability} />
       </div>
     </div>
   )

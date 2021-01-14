@@ -53,7 +53,7 @@ export const checkMemSize = (item) => {
 
 export const filterData = (filters, rawData) => {
   const {
-    name, manufacturer, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock
+    name, manufacturer, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock, color
   } = filters
 
   // shallow copy data
@@ -91,10 +91,24 @@ export const filterData = (filters, rawData) => {
       if (item.availability === 'OUTOFSTOCK') return false
     }
 
+    if (color !== '') {
+      if (!item.color.includes(color)) return false
+    }
+
     return true
   })
 
   return copiedData
+}
+
+export const getColors = (arrProducts) => {
+  const result = []
+  arrProducts.forEach((item) => {
+    item.color.forEach((color) => {
+      if (!result.includes(color)) result.push(color)
+    })
+  })
+  return result
 }
 
 // not in used

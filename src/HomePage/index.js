@@ -33,11 +33,6 @@ const HomePage = () => {
         <li>Acceptable display in mobile (I did not want to spend too much time on this)</li>
       </ul>
 
-      <h3>Features under development:</h3>
-      <ul>
-        <li>Filter product by colors</li>
-      </ul>
-
       <div style={{ marginTop: '40px', fontSize: '16px', color: 'rgb(24, 68, 126)' }}>
         Developed by
         {' '}

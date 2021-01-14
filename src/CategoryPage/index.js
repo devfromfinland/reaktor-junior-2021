@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
-import { filterData } from '../utils/helpers'
+import { filterData, getColors } from '../utils/helpers'
 import { CATEGORIES } from '../services/categoryService'
 import ListItems from './ListItems'
 import FilterBox from './FilterBox'
@@ -66,6 +66,7 @@ const CategoryPage = () => {
       <FilterBox
         onFilterData={handleFilterData}
         onReset={() => setFilteredData(null)}
+        colors={getColors(filteredData || promiseData.data)}
       />
 
       <div>
@@ -79,7 +80,6 @@ const CategoryPage = () => {
       { renderListHeader() }
 
       <ListItems itemData={filteredData || promiseData.data} topHeight={topContentHeight} />
-
     </div>
   )
 }

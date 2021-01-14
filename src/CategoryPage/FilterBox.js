@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const FilterBox = ({ onFilterData, onReset }) => {
+const FilterBox = ({ onFilterData, onReset, colors }) => {
   const [manufacturer, setManufacturer] = useState('')
   const [name, setName] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -8,6 +8,7 @@ const FilterBox = ({ onFilterData, onReset }) => {
   const [showInStock, setShowInStock] = useState(true)
   const [showLowStock, setShowLowStock] = useState(true)
   const [showOutOfStock, setShowOutOfStock] = useState(true)
+  const [color, setColor] = useState('')
 
   const handleReset = () => {
     setManufacturer('')
@@ -17,6 +18,7 @@ const FilterBox = ({ onFilterData, onReset }) => {
     setShowInStock(true)
     setShowLowStock(true)
     setShowOutOfStock(true)
+    setColor('')
     onReset()
   }
 
@@ -99,10 +101,19 @@ const FilterBox = ({ onFilterData, onReset }) => {
       </div>
 
       <div>
+        Filter by color:
+        {' '}
+        <select value={color} onChange={(e) => setColor(e.target.value)}>
+          <option value="" disabled>Select color</option>
+          { colors.map((item) => <option value={item} key={item}>{item}</option>)}
+        </select>
+      </div>
+
+      <div>
         <button
           type="button"
           onClick={() => onFilterData({
-            manufacturer, name, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock
+            manufacturer, name, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock, color
           })}
           name="button-filter"
           className="main-button"

@@ -10,11 +10,11 @@ The web app is built based on their two (bad) legacy APIs needed to implement wo
 
 ### Back-end: SERVERLESS (currently using this)
 - [x] Implemented a AWS Lambda function in the middle to serve clients' requests
-- [x] Implemented a AWS Lambda function to fetch updated data from legacy APIs (included: handle errors & merge availability data & update new data to DynamoDB)
-- [x] Scheduled the AWS Lambda function with *CloudWatch* to trigger every 5 minutes to fetch updated data **(this is currently turned off to save Free Tier capacity)**
+- [x] Implemented a AWS Lambda function to fetch updated data from legacy APIs (included: handle errors & merge availability data, save and update data to AWS S3)
+- [x] Scheduled the AWS Lambda function with *CloudWatch* to trigger every 5 minutes to fetch updated data **(this is currently trigger every 6 hours to save Free Tier capacity)**
 
 ### Back-end: NODE + EXPRESS (alternative)
-- [x] Implemented a middle server to serve clients' requests as well as to fetch updated data from legacy APIs every 5minutes
+- [x] Implemented a middle server to serve clients' requests as well as to fetch updated data from legacy APIs every 5 minutes
 - [x] Handle errors
 - [x] Merge availability data
 

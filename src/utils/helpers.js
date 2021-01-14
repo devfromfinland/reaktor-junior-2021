@@ -1,5 +1,3 @@
-export const CATEGORIES = ['gloves', 'facemasks', 'beanies']
-// export const MANUFACTURERS = ['']
 export const extractAvailabilityText = (text) => {
   const regex = /<INSTOCKVALUE>(.*?)<\/INSTOCKVALUE>/
   const result = text.match(regex)

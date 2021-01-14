@@ -3,7 +3,7 @@ import {
   render, screen, fireEvent
 } from '@testing-library/react'
 import App from '../App'
-import { fetchData } from '../services/categoryService'
+import { fetchNewData } from '../services/categoryService'
 
 it('render main elements in root', () => {
   render(<App />)
@@ -20,7 +20,7 @@ it('render main elements in root', () => {
 
 describe('navigating to category page', () => {
   beforeEach(() => {
-    const testData = fetchData()
+    const testData = fetchNewData()
     render(
       <App testData={testData} />
     )
@@ -42,7 +42,7 @@ describe('navigating to category page', () => {
 
 describe('on Category Page: Accessories', () => {
   beforeEach(async () => {
-    const testData = fetchData()
+    const testData = fetchNewData()
     render(
       <App testData={testData} />
     )

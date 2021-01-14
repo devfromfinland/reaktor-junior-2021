@@ -3,7 +3,7 @@ import axios from 'axios'
 export const CATEGORIES = ['gloves', 'facemasks', 'beanies']
 
 const forcedError = false
-const apiUrl = 'https://jyyfgl2f69.execute-api.eu-west-1.amazonaws.com/dev'
+export const apiUrl = 'https://jyyfgl2f69.execute-api.eu-west-1.amazonaws.com/dev'
 const headerForcedError = forcedError
   ? { headers: { 'x-force-error-mode': 'all' } }
   : null

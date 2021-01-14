@@ -62,7 +62,7 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="category-container" aria-label="category-page" id="category-contents">
+    <div className="category-container" aria-label="category-page" id="category-contents" data-testid="filter-data">
       <FilterBox
         onFilterData={handleFilterData}
         onReset={() => setFilteredData(null)}

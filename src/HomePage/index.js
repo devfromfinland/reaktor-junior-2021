@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react'
 import linkedin from './linkedin.png'
 import github from './github.png'
@@ -12,12 +13,19 @@ const HomePage = () => {
       <h3>Web app features:</h3>
       <ul>
         <li>Allow the clothing brand to use the two existing legacy APIs</li>
-        <li>Implement work around for bad HTTP Response (code 204, no body content)</li>
+        <li>
+          Implement work around for bad API
+          (handled by back-end middle server/lambda function)
+        </li>
         <li>
           Allow users to quickly check product availability
-          information from a single UI with filters
+          information from a single UI with different filters
         </li>
-        <li>Improve User Experience and Loading Speed</li>
+        <li>Improve User Experience</li>
+        <li>
+          Quick page loading and reloading (scored ~99/100 on mobile and 100/100 on desktop)
+          via <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fjunior-reaktor.ykitest.fi%2F&tab=mobile">PageSpeed Insights</a>
+        </li>
         <li>
           Allow users to use web app when offline,
           data will be updated once user has internet connection again
@@ -28,7 +36,6 @@ const HomePage = () => {
       <h3>Features under development:</h3>
       <ul>
         <li>Filter product by colors</li>
-        <li>Filter product by availability</li>
       </ul>
 
       <div style={{ marginTop: '40px', fontSize: '16px', color: 'rgb(24, 68, 126)' }}>

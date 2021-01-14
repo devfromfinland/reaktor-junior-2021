@@ -53,7 +53,7 @@ export const checkMemSize = (item) => {
 
 export const filterData = (filters, rawData) => {
   const {
-    name, manufacturer, minPrice, maxPrice
+    name, manufacturer, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock
   } = filters
 
   // shallow copy data
@@ -77,6 +77,18 @@ export const filterData = (filters, rawData) => {
 
     if (maxPrice !== '') {
       if (parseInt(maxPrice, 10) > 0 && item.price > parseInt(maxPrice, 10)) return false
+    }
+
+    if (!showInStock) {
+      if (item.availability === 'INSTOCK') return false
+    }
+
+    if (!showLowStock) {
+      if (item.availability === 'LESSTHAN10') return false
+    }
+
+    if (!showOutOfStock) {
+      if (item.availability === 'OUTOFSTOCK') return false
     }
 
     return true

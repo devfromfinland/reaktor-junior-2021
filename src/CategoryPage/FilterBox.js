@@ -5,12 +5,18 @@ const FilterBox = ({ onFilterData, onReset }) => {
   const [name, setName] = useState('')
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
+  const [showInStock, setShowInStock] = useState(true)
+  const [showLowStock, setShowLowStock] = useState(true)
+  const [showOutOfStock, setShowOutOfStock] = useState(true)
 
   const handleReset = () => {
     setManufacturer('')
     setName('')
     setMinPrice('')
     setMaxPrice('')
+    setShowInStock(true)
+    setShowLowStock(true)
+    setShowOutOfStock(true)
     onReset()
   }
 
@@ -62,10 +68,41 @@ const FilterBox = ({ onFilterData, onReset }) => {
       </div>
 
       <div>
+        {/* Note: not checking input yet (e.g. min < max) */}
+        Filter by availability:
+        {' '}
+        available
+        <input
+          name="showInStock"
+          type="checkbox"
+          checked={showInStock}
+          onChange={() => setShowInStock((currentStatus) => !currentStatus)}
+        />
+
+        {' '}
+        out of stock
+        <input
+          name="showOutOfStock"
+          type="checkbox"
+          checked={showOutOfStock}
+          onChange={() => setShowOutOfStock((currentStatus) => !currentStatus)}
+        />
+
+        {' '}
+        low stock
+        <input
+          name="showLowStock"
+          type="checkbox"
+          checked={showLowStock}
+          onChange={() => setShowLowStock((currentStatus) => !currentStatus)}
+        />
+      </div>
+
+      <div>
         <button
           type="button"
           onClick={() => onFilterData({
-            manufacturer, name, minPrice, maxPrice
+            manufacturer, name, minPrice, maxPrice, showInStock, showLowStock, showOutOfStock
           })}
           name="button-filter"
           className="main-button"

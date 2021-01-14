@@ -37,6 +37,6 @@
     "react/require-default-props": "off",
     "react/prop-types": 0,
     "semi": [2, "never"],
-    "linebreak-style": [2, "unix"]
+    "linebreak-style": [2, "windows"]
   }
 }

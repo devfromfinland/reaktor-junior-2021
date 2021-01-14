@@ -3,7 +3,7 @@ import {
   render, screen, fireEvent
 } from '@testing-library/react'
 import App from '../App'
-import { fetchData } from '../services/categoryService'
+import { fetchNewData } from '../services/categoryService'
 
 it('render main elements in root', () => {
   render(<App />)
@@ -13,18 +13,19 @@ it('render main elements in root', () => {
 
   // check active navigation item is Home
   expect(screen.queryByRole('listitem', { name: 'Home' })).toHaveClass('active')
-  expect(screen.queryByRole('listitem', { name: 'Jackets' })).not.toHaveClass('active')
-  expect(screen.queryByRole('listitem', { name: 'Shirts' })).not.toHaveClass('active')
-  expect(screen.queryByRole('listitem', { name: 'Accessories' })).not.toHaveClass('active')
+
+  expect(screen.queryByRole('listitem', { name: 'Gloves' })).not.toHaveClass('active')
+  expect(screen.queryByRole('listitem', { name: 'Facemasks' })).not.toHaveClass('active')
+  expect(screen.queryByRole('listitem', { name: 'Beanies' })).not.toHaveClass('active')
 })
 
 describe('navigating to category page', () => {
   beforeEach(() => {
-    const testData = fetchData()
+    const testData = fetchNewData()
     render(
       <App testData={testData} />
     )
-    fireEvent.click(screen.getByText('Accessories'))
+    fireEvent.click(screen.getByText('Beanies'))
   })
 
   it('render loading indicator', () => {
@@ -34,15 +35,15 @@ describe('navigating to category page', () => {
 
   it('update navigation bar', () => {
     expect(screen.queryByRole('listitem', { name: 'Home' })).not.toHaveClass('active')
-    expect(screen.queryByRole('listitem', { name: 'Jackets' })).not.toHaveClass('active')
-    expect(screen.queryByRole('listitem', { name: 'Shirts' })).not.toHaveClass('active')
-    expect(screen.queryByRole('listitem', { name: 'Accessories' })).toHaveClass('active')
+    expect(screen.queryByRole('listitem', { name: 'Gloves' })).not.toHaveClass('active')
+    expect(screen.queryByRole('listitem', { name: 'Facemasks' })).not.toHaveClass('active')
+    expect(screen.queryByRole('listitem', { name: 'Beanies' })).toHaveClass('active')
   })
 })
 
-describe('on Category Page: Accessories', () => {
+describe('on Category Page: Beanies', () => {
   beforeEach(async () => {
-    const testData = fetchData()
+    const testData = fetchNewData()
     render(
       <App testData={testData} />
     )
@@ -51,7 +52,7 @@ describe('on Category Page: Accessories', () => {
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', { configurable: true, value: 1000 })
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', { configurable: true, value: 1000 })
 
-    fireEvent.click(screen.queryByText('Accessories'))
+    fireEvent.click(screen.queryByText('Beanies'))
     await screen.findByLabelText('category-page')
   })
 

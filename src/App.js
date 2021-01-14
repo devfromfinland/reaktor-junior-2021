@@ -1,13 +1,13 @@
 import React, { useState, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { fetchData } from './services/categoryService'
-import NavigationBar from './components/NavigationBar'
+import { fetchNewData, CATEGORIES } from './services/categoryService'
 import { AppContext } from './services/contextService'
+import NavigationBar from './components/NavigationBar'
 import ErrorBoundary from './components/ErrorBoundary'
 import LoadingScreen from './components/LoadingScreen'
 import HomePage from './HomePage'
-import './App.css'
 import CategoryPage from './CategoryPage'
+import './App.css'
 
 // use mock API for development
 // if (process.env.NODE_ENV === 'development') {
@@ -15,7 +15,8 @@ import CategoryPage from './CategoryPage'
 //   worker.start()
 // }
 
-const data = fetchData()
+const data = fetchNewData()
+// const data = fetchProducts(categories)
 
 const App = ({ testData }) => {
   const [context, setContext] = useState(process.env.NODE_ENV === 'test' ? testData : data)
@@ -24,7 +25,7 @@ const App = ({ testData }) => {
     <AppContext.Provider value={{ context, setContext }}>
       <Router>
         <div aria-label="root-container" style={{ height: '100%' }}>
-          <NavigationBar />
+          <NavigationBar categories={CATEGORIES} />
 
           <Switch>
             <Route path="/" exact render={() => (<HomePage />)} />

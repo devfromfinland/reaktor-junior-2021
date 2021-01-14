@@ -4,7 +4,7 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 // import * as swRegistration from './swRegistration'
-import * as serviceWorkerRegistration from './serviceWorkerRegistration'
+// import * as serviceWorkerRegistration from './serviceWorkerRegistration'
 
 // ReactDOM.render(
 //   <App />,
@@ -19,9 +19,9 @@ ReactDOM.unstable_createRoot(
 // Register for the app to work offline and load faster.
 // Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register()
+// serviceWorkerRegistration.register()
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals(console.log)
+reportWebVitals()

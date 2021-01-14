@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
 import { filterData } from '../utils/helpers'
+import { CATEGORIES } from '../services/categoryService'
 import ListItems from './ListItems'
 import FilterBox from './FilterBox'
 
@@ -20,7 +21,7 @@ const CategoryPage = () => {
     }
   })
 
-  if (category !== 'jackets' && category !== 'shirts' && category !== 'accessories') {
+  if (!CATEGORIES.includes(category)) {
     return <Redirect to="/" />
   }
 
@@ -61,7 +62,7 @@ const CategoryPage = () => {
   }
 
   return (
-    <div className="category-container" aria-label="category-page" id="category-contents">
+    <div className="category-container" aria-label="category-page" id="category-contents" data-testid="filter-data">
       <FilterBox
         onFilterData={handleFilterData}
         onReset={() => setFilteredData(null)}

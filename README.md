@@ -3,7 +3,7 @@ This is the repo for Reaktor Junior 2021's pre-assignment ([assignment link](htt
 
 In this assignment, I have built a simple web app for a clothing brand to use in their warehouses. **The main purpose of this simple web app is to provide a tool to quickly check simple product and availability information from a single UI.**
 
-The web app is built based on their two legacy (bad) APIs needed to implement work around any of their issues. I have also taken advantage of this assignment to try our React's Suspense feature in Concurrent Mode (which is still in experimental) for efficient data fetching and rendering
+The web app is built based on their two (bad) legacy APIs needed to implement work around any of their issues. I have also taken advantage of this assignment to try our React's Suspense feature in Concurrent Mode (which is still in experimental) for efficient data fetching and rendering
 
 
 ## Implementations:
@@ -24,15 +24,13 @@ The web app is built based on their two legacy (bad) APIs needed to implement wo
 - [x] Quick rendering a big list with *react-window*
 - [x] Quick and efficient data fetching and rendering for better user experience with *React Suspense*
 - [x] State management with *React Context*
-- [x] Quick product searching and data filtering
+- [x] Quick product searching and data filtering: by name, by manufacturer, by min & max price, by availability, and by color
 - [x] Deploy website to *AWS S3* with [custom domain](https://junior-reaktor.ykitest.fi) (using Cloudfront, Certificate Manager and Route 53)
 - [x] CI/CD with *Github Actions*
 - [x] Unit tests with *react-scripts* ([link](https://testing-library.com/docs/react-testing-library/intro))
 - [x] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
 - [x] Improve performance and loading speed, measuring with *web-vitals* ?? ([link](https://web.dev/vitals/))
 - [x] Responsive UI (viewable in small mobile screen)
-- [ ] Filter product by availability
-- [ ] Filter product by colors
 
 
 ## LIVE Demo

@@ -5,11 +5,22 @@ In this assignment, I have built a simple web app for a clothing brand to use in
 
 The web app is built based on their two legacy (bad) APIs needed to implement work around any of their issues. I have also taken advantage of this assignment to try our React's Suspense feature in Concurrent Mode (which is still in experimental) for efficient data fetching and rendering
 
-Demo available at: [https://junior-reaktor.ykitest.fi/](https://junior-reaktor.ykitest.fi/)
+## Implementations:
 
-## What have been used and applied in this app?
+### Back-end: SERVERLESS option
+- [x] Implemented a lambda function in the middle to serve clients' requests
+- [x] Implemented a lambda function to fetch updated data from legacy APIs (included: handle errors & merge availability data & update new data to DynamoDB)
+- [ ] Scheduled the lambda function to trigger every 5 minutes to fetch updated data
+
+### Back-end: NODE EXPRESS server option
+- [x] Implemented a middle server to serve clients' requests as well as to fetch updated data from legacy APIs every  5minutes
+- [x] Handle errors
+- [x] Merge availability data
+- [x] Update new data to MongoDB
+
+### Front-end
 - [x] Quick and simple navigation with *react-router-dom*
-- [x] Data fetching from legacy APIs with *axios*
+- [x] Data fetching from new API endpoint (lambda function) with *axios*
 - [x] Quick rendering a big list with *react-window*
 - [x] Quick and efficient data fetching and rendering for better user experience with *React Suspense*
 - [x] State management with *React Context*
@@ -20,9 +31,23 @@ Demo available at: [https://junior-reaktor.ykitest.fi/](https://junior-reaktor.y
 - [x] Caching with *ServiceWorker* ([link](https://developer.mozilla.org/en-US/docs/Web/API/Cache)) and *Progressive Web App* ([link](https://create-react-app.dev/docs/making-a-progressive-web-app))
 - [x] Improve performance and loading speed, measuring with *web-vitals* ?? ([link](https://web.dev/vitals/))
 - [x] Responsive UI (viewable in small mobile screen)
-- [ ] Add notification, reload website, refresh cache when there is an update (e.g. availability, new product) [NotificationEvent](https://developer.mozilla.org/en-US/docs/Web/API/NotificationEvent)
-- [ ] Filter product by colors
 - [ ] Filter product by availability
+- [ ] Filter product by colors
+
+
+## Demo
+Available at: [https://junior-reaktor.ykitest.fi/](https://junior-reaktor.ykitest.fi/)
+
+
+
+
+
+
+
+
+
+
+
 
 ## To run this app:
 Run `npm install` to install dependencies

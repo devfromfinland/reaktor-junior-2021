@@ -23,7 +23,7 @@ const HomePage = () => {
         </li>
         <li>Improve User Experience</li>
         <li>
-          Quick page loading and reloading (scored ~99/100 on mobile and 100/100 on desktop)
+          Quick page loading and reloading (scored ~90/100 on mobile and 100/100 on desktop)
           via <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fjunior-reaktor.ykitest.fi%2F&tab=mobile">PageSpeed Insights</a>
         </li>
         <li>

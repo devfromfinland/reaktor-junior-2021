@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-const FilterBox = ({ onFilterData, onReset, colors }) => {
+const FilterBox = ({
+  onFilterData, onReset, colors, refetchData
+}) => {
   const [manufacturer, setManufacturer] = useState('')
   const [name, setName] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -122,6 +124,9 @@ const FilterBox = ({ onFilterData, onReset, colors }) => {
         </button>
         <button type="button" onClick={handleReset} name="button-reset" className="main-button">
           reset
+        </button>
+        <button type="button" onClick={refetchData} name="button-refetch" className="main-button">
+          refresh
         </button>
       </div>
     </div>

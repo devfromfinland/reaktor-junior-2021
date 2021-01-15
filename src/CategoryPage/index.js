@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
 import { filterData, getColors } from '../utils/helpers'
-import { CATEGORIES } from '../services/categoryService'
+import { CATEGORIES, fetchNewData } from '../services/categoryService'
 import ListItems from './ListItems'
 import FilterBox from './FilterBox'
 
 const CategoryPage = () => {
   const [filteredData, setFilteredData] = useState(null)
-  const { context } = useAppContext()
+  const { context, setContext } = useAppContext()
   const [topContentHeight, setTopContentHeight] = useState(null)
   const { category } = useParams()
 
@@ -49,6 +49,14 @@ const CategoryPage = () => {
     setFilteredData(result)
   }
 
+  const refetchData = () => {
+    // todo: clear cache (if necessary to get the latest cache version)
+
+    // fetch new data
+    const newData = fetchNewData()
+    setContext(newData)
+  }
+
   const renderListHeader = () => {
     return (
       <div className="row-header" aria-label="list-items-header">
@@ -67,6 +75,7 @@ const CategoryPage = () => {
         onFilterData={handleFilterData}
         onReset={() => setFilteredData(null)}
         colors={getColors(filteredData || promiseData.data)}
+        refetchData={refetchData}
       />
 
       <div>

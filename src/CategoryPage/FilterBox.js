@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
-const FilterBox = ({
+const FilterBox = forwardRef(({
   onFilterData, onReset, colors, refetchData
-}) => {
+}, ref) => {
   const [manufacturer, setManufacturer] = useState('')
   const [name, setName] = useState('')
   const [minPrice, setMinPrice] = useState('')
@@ -23,6 +23,12 @@ const FilterBox = ({
     setColor('')
     onReset()
   }
+
+  useImperativeHandle(ref, () => {
+    return {
+      handleReset
+    }
+  })
 
   return (
     <div className="filter-container">
@@ -131,6 +137,6 @@ const FilterBox = ({
       </div>
     </div>
   )
-}
+})
 
 export default FilterBox

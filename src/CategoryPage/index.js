@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { useAppContext } from '../services/contextService'
 import { filterData, getColors } from '../utils/helpers'
@@ -12,6 +12,11 @@ const CategoryPage = () => {
   const [topContentHeight, setTopContentHeight] = useState(null)
   const { category } = useParams()
 
+  const filterRef = useRef()
+
+  // eslint-disable-next-line react/destructuring-assignment
+  const promiseData = context[category] ? context[category].read() : null
+
   useEffect(() => {
     // get the height above the item list (to calculate suitable heigh for virtual window)
     const topContent = document.getElementById('category-contents')
@@ -19,14 +24,15 @@ const CategoryPage = () => {
     if (topContent && navBar) {
       setTopContentHeight(topContent.clientHeight + navBar.clientHeight)
     }
-  })
+
+    // reset filter and dilferedData when switching category
+    setFilteredData(null)
+    filterRef.current.handleReset()
+  }, [promiseData])
 
   if (!CATEGORIES.includes(category)) {
     return <Redirect to="/" />
   }
-
-  // eslint-disable-next-line react/destructuring-assignment
-  const promiseData = context[category] ? context[category].read() : null
 
   if (!promiseData) {
     console.log('Category variable was not set up')
@@ -76,6 +82,7 @@ const CategoryPage = () => {
         onReset={() => setFilteredData(null)}
         colors={getColors(filteredData || promiseData.data)}
         refetchData={refetchData}
+        ref={filterRef}
       />
 
       <div>
